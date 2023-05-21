@@ -1,0 +1,929 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <HTA:APPLICATION
+        ID="CerediraAutomation"
+        APPLICATIONNAME="CerediraAutomation"
+        BORDER="thick"
+        BORDERSTYLE="normal"
+        maximizeButton="yes"
+        minimizeButton="yes"
+        SHOWINTASKBAR="yes"
+        SYSMENU="yes"
+        CAPTION="yes"
+        SINGLEINSTANCE="yes"
+    />
+
+    <script type="text/vbscript">
+        Dim gInstallPath
+        Dim gDownloadPath
+        Dim gDownloadURL
+        Dim gDownloadURL2
+        Dim gConsoleLog
+
+        Dim gFSO
+        Dim gShell
+        Dim gApp
+
+        Function fileExists(filePath)
+            fileExists = CBool(0)
+
+            If gFSO.FileExists(filePath) Then
+                fileExists = CBool(1)
+            Else
+                log "    Ошибка файла: " & "Файл """ & filePath & """ не существует. Укажите корректный путь к файлу."
+            End If
+        End Function
+
+        Function fileExistsUI(filePath)
+            fileExistsUI = CBool(0)
+
+            If fileExists(filePath) Then
+                fileExistsUI = CBool(1)
+            Else
+                MsgBox "Файл """ & filePath & """ не существует. Укажите корректный путь к файлу.", 16, "Ошибка файла"
+            End If
+        End Function
+
+        Function folderExists(folderPath)
+            folderExists = CBool(0)
+
+            If gFSO.FolderExists(folderPath) Then
+                folderExists = CBool(1)
+            Else
+                log "    Ошибка каталога: " & "Каталог """ & folderPath & """ не существует. Укажите корректный путь к каталогу."
+            End If
+        End Function
+
+        Function folderExistsUI(folderPath)
+            folderExistsUI = CBool(0)
+
+            If folderExists(folderPath) Then
+                folderExistsUI = CBool(1)
+            Else
+                MsgBox "Каталог """ & folderPath & """ не существует. Укажите корректный путь к каталогу.", 16, "Ошибка каталога"
+            End If
+        End Function
+
+        Function checkNotEmpty(value, paramName)
+            checkNotEmpty = CBool(0)
+
+            If StrComp(value, "") = 0 Then
+                log "    Ошибка параметров: " & "Параметр """ & paramName & """ не может быть пустым. Укажите корректное значение параметра."
+            Else
+                checkNotEmpty = CBool(1)
+            End If
+        End Function
+
+        Function checkNotEmptyUI(value, paramName)
+            checkNotEmptyUI = CBool(0)
+
+            If checkNotEmpty(value, paramName) Then
+                checkNotEmptyUI = CBool(1)
+            Else
+                MsgBox "Параметр """ & paramName & """ не может быть пустым. Укажите корректное значение параметра.", 16, "Ошибка параметров"
+            End If
+        End Function
+
+        Sub log(msg)
+            gConsoleLog.value = gConsoleLog.value & vbCrLf & msg
+        End Sub
+
+        Sub window_OnLoad()
+            window.resizeTo 1280, 800
+            Set gInstallPath = document.getElementsByName("installPath")(0)
+            Set gDownloadPath = document.getElementsByName("downloadPath")(0)
+            Set gDownloadURL = document.getElementsByName("downloadURL")(0)
+            Set gDownloadURL2 = document.getElementsByName("downloadURL2")(0)
+
+            Set gConsoleLog = document.getElementById("consoleLog")
+
+            Set gFSO = CreateObject("Scripting.FileSystemObject")
+            Set gShell = CreateObject("WScript.Shell")
+            Set gApp = CreateObject("Shell.Application")
+
+            gInstallPath.value = gFSO.BuildPath(gShell.CurrentDirectory, "CerediraAutomation")
+            log "Стартовый каталог установки: " & gInstallPath.value
+            gDownloadPath.value = gShell.CurrentDirectory
+            log "Стартовый каталог скачивания компонентов: " & downloadPath.value
+
+            checkComponentsUI
+        End Sub
+
+        Sub window_OnUnLoad()
+            Set gFSO = Nothing
+            Set gShell = Nothing
+            Set gApp = Nothing
+        End Sub
+
+        Sub checkComponentsUI()
+            log "Проверка компонентов"
+            Dim components : Set components = document.getElementsByName("download")
+            log "length: " & components.length
+            Dim component
+
+            For Each component In components
+                Dim parent : Set parent = component.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement
+                log "    Компонент: " & parent.getAttribute("id")
+
+                Dim downloadCheck : Set downloadCheck = getChildByName(component.parentElement.parentElement.parentElement, "downloadCheck")
+
+                Dim componentDownloadPath
+                componentDownloadPath = gFSO.BuildPath(downloadPath.value, parent.getAttribute("id"))
+                If gFSO.FileExists(componentDownloadPath) Then
+                    downloadCheck.innerHTML = "Скачан"
+                    log "        Скачан"
+                    getChildByName(component.parentElement, "unzip").style.display = "table"
+                Else
+                    getChildByName(component.parentElement, "unzip").style.display = "none"
+                End If
+
+                ' Dim unzipCheck : Set unzipCheck = getChildByName(component.parentElement.parentElement.parentElement, "unzipCheck")
+
+                Dim componentInstallPath
+                componentInstallPath = gInstallPath.value & "\etc\install\" &  Split(parent.getAttribute("id"), "-")(0)
+                If gFSO.FolderExists(componentInstallPath) Then
+                    log "        Распакован"
+                    If StrComp(downloadCheck.innerHTML, "") = 0 Then
+                        downloadCheck.innerHTML = "Распакован"
+                    Else
+                        downloadCheck.innerHTML = downloadCheck.innerHTML & ", распакован"
+                    End If
+                    getChildByName(component.parentElement, "addContextMenu").style.display = "table"
+                    ' getChildByName(component.parentElement, "deleteContextMenu").style.display = "table"
+                    getChildByName(component.parentElement, "delete").style.display = "table"
+                Else
+                    getChildByName(component.parentElement, "addContextMenu").style.display = "none"
+                    ' getChildByName(component.parentElement, "deleteContextMenu").style.display = "none"
+                    getChildByName(component.parentElement, "delete").style.display = "none"
+                End If
+
+
+                On Error Resume Next
+
+                gShell.RegRead("HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\Background\shell\" & gFSO.GetFolder(gInstallPath.value).Name & "_" & Split(parent.getAttribute("id"), "-")(0) & "\MUIVerb")
+                If Err.Number = 0 Then
+                    log "        Добавлен в контекстное меню"
+                    If StrComp(downloadCheck.innerHTML, "") = 0 Then
+                        downloadCheck.innerHTML = "Добавлен в контекстное меню"
+                    Else
+                        downloadCheck.innerHTML = downloadCheck.innerHTML & ", добавлен в КМ"
+                    End If
+
+                    getChildByName(component.parentElement, "deleteContextMenu").style.display = "table"
+                Else
+                    getChildByName(component.parentElement, "deleteContextMenu").style.display = "none"
+                End If
+                Err.Clear
+
+                On Error Goto 0
+            Next
+        End Sub
+
+        Function getChildByName(element, name)
+            ' log "        Поиск дочерних элементов по имени"
+            Dim child
+            For Each child In element.children
+                ' log "        Сравнение " & child.getAttribute("name") & " и " & name
+                If StrComp(child.getAttribute("name"), name) = 0 Then
+                    Set getChildByName = child
+                    Exit Function
+                End If
+                ' log "        " & child.hasChildNodes() & " " & child.childNodes.length & " " & child.nodeName
+                If child.childNodes.length <> 0 Then
+                    Dim found : Set found = getChildByName(child, name)
+                    If Not found Is Nothing Then
+                        Set getChildByName = found
+                        Exit Function
+                    End If
+                End If
+            Next
+            ' log "        Дошли до Nothing"
+            Set getChildByName = Nothing
+        End Function
+
+        Sub SelectDownloadFolderClick()
+            log "Выбор каталога скачивания компонентов"
+            Dim path
+            path = SelectFolder("")
+            If path <> "1" Then
+                gDownloadPath.value = path
+                log "    Выбран каталог: " & gDownloadPath.value
+            Else
+                log "    Каталог не выбран, остался прежний"
+            End If
+        End Sub
+
+        Sub SelectInstallFolderClick()
+            log "Выбор каталога установки"
+            Dim path
+            path = SelectFolder("")
+            If path <> "1" Then
+                gInstallPath.value = path
+                log "    Выбран каталог: " & gInstallPath.value
+            Else
+                log "    Каталог не выбран, остался прежний"
+            End If
+        End Sub
+
+        Function SelectFolder( myStartFolder )
+            Dim objFolder
+
+            On Error Resume Next ' Custom error handling
+            SelectFolder = vbNull
+
+            ' Create a dialog object
+            Set objFolder = gApp.BrowseForFolder( 0, "Select Folder", 53, ssfDESKTOP  )
+
+            ' Return the path of the selected folder
+            If IsObject( objfolder ) Then SelectFolder = objFolder.Self.Path
+            Set objFolder = Nothing
+            On Error Goto 0
+        End Function
+
+        Sub openURL(link)
+            log "Открытие ссылки: " & link
+            gShell.run(link)
+        End Sub
+
+        Sub Download(URL, Save2File)
+            Dim File, BS
+            On Error Resume Next
+            Set File = CreateObject("WinHTTP.WinHTTPRequest.5.1")
+            File.Open "GET", URL, False
+            File.Send
+            File.WaitForResponse
+            If Err.number <> 0 then
+                log "    ОШИБКА: " & Err.number & ": " & Err.description
+                Err.clear
+            End If
+            If File.Status = 200 Then ' File exists and it is ready to be downloaded
+                Set BS = CreateObject("ADODB.Stream")
+                BS.type = 1
+                BS.open
+                BS.Write File.ResponseBody
+                BS.SaveToFile Save2File, 2
+            ElseIf File.Status = 404 Then
+                log "    ОШИБКА: Файл не найден: " & File.Status
+            Else
+                log "    ОШИБКА: Ошибка получения файла. Неизвестная ошибка: " & File.Status
+            End If
+
+            On Error Goto 0
+        End Sub
+
+        Sub downloadComponentUI( component )
+            Dim componentFullName : componentFullName = component.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute("id")
+            log "Скачивание компонента: " & componentFullName
+            log "    Путь к компоненту: " & gDownloadURL.value & "/" & componentFullName
+            log "    Каталог скачивания: " & gDownloadPath.value
+
+            If checkNotEmptyUI(gDownloadPath.value, "Каталог скачивания компонентов") Then
+                If checkNotEmptyUI(gDownloadURL.value, "Адрес загрузки CerediraAutomation") Then
+                    If folderExistsUI(gDownloadPath.value) Then
+                        Download gDownloadURL.value & "/" & componentFullName, gFSO.BuildPath(gDownloadPath.value, componentFullName)
+                        checkComponentsUI
+                        Exit Sub
+                    End If
+                End If
+            End If
+
+            MsgBox "Компонент """ & componentFullName & """ не удалось скачать. Смотрите лог, для разбора с ошибкой.", 16, "Ошибка загрузки компонента"
+        End Sub
+
+        Sub downloadComponent2UI( component )
+            Dim componentFullName : componentFullName = component.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute("id")
+            log "Скачивание компонента: " & componentFullName
+            log "    Путь к компоненту: " & gDownloadURL2.value & "/" & componentFullName
+            log "    Каталог скачивания: " & gDownloadPath.value
+            
+            If checkNotEmptyUI(gDownloadPath.value, "Каталог скачивания компонентов") Then
+                If checkNotEmptyUI(gDownloadURL2.value, "Адрес загрузки CerediraFHS") Then
+                    If folderExistsUI(gDownloadPath.value) Then
+                        Download gDownloadURL2.value & "/" & componentFullName, gFSO.BuildPath(gDownloadPath.value, componentFullName)
+                        checkComponentsUI
+                        Exit Sub
+                    End If
+                End If
+            End If
+
+            MsgBox "Компонент """ & componentFullName & """ не удалось скачать. Смотрите лог, для разбора с ошибкой.", 16, "Ошибка загрузки компонента"
+        End Sub
+
+        Function unZip(zipFile, extractTo)
+            unZip = CBool(0)
+            If fileExists(zipFile) Then
+                If Right(zipFile, 4) = ".zip" Then
+                    If folderExists(extractTo) Then
+                        log "        Распаковка архива " & zipFile & " в каталог " & extractTo
+                        Set filesInZip = gApp.NameSpace(zipFile).items
+                        log "        Копирование файлов"
+                        gApp.NameSpace(extractTo).CopyHere(filesInZip)
+
+                        If Err.Number <> 0 Then
+                            log "Ошибка: " & Err.Number & ", " & Err.Description
+                            Err.Clear
+                        Else
+                            unZip = CBool(1)
+                        End If
+                    End If
+                End If
+            End If
+        End Function
+
+        Function unZip7z(zipFile, extractTo)
+            unZip7z = CBool(0)
+
+            If fileExists(zipFile) Then
+                If Right(zipFile, 3) = ".7z" Then
+                    If folderExists(extractTo) Then
+                        log "    Команда распаковки:"
+                        log "        cmd.exe /c """"" & extractTo & "\bin\7-Zip\7z.exe"" x """ & zipFile & """ -o""" & extractTo & """ -y"""
+
+                        gShell.run "cmd.exe /c """"" & extractTo & "\bin\7-Zip\7z.exe"" x """ & zipFile & """ -o""" & extractTo & """ -y""", 0, true
+
+                        If Err.Number <> 0 Then
+                            log "Ошибка: " & Err.Number & ", " & Err.Description
+                            Err.Clear
+                        Else
+                            unZip7z = CBool(1)
+                        End If
+                    End If
+                End If
+            End If
+        End Function
+
+        Sub UnZipComponentUI(component)
+            Dim componentFullName : componentFullName = component.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute("id")
+            log "Распаковка с использованием Zip компонента: " & componentFullName
+            Dim archivePath : archivePath = gFSO.BuildPath(gDownloadPath.value, componentFullName)
+            log "    Путь к архиву: " & archivePath
+            log "    Путь распаковки: " & gInstallPath.value
+
+            If StrComp(gInstallPath.value, gFSO.BuildPath(gShell.CurrentDirectory, "CerediraAutomation")) = 0 Then
+                If Not folderExists(gInstallPath.value) Then
+                    gFSO.CreateFolder(gInstallPath.value)
+                End If
+            End If
+
+            If fileExistsUI(archivePath) Then
+                If Right(archivePath, 4) = ".zip" Then
+                    If folderExistsUI(gInstallPath.value) Then
+                        If unZip(archivePath, gInstallPath.value) Then
+                            checkComponentsUI
+                            Exit Sub
+                        End If
+                    End If
+                End If
+            End If
+
+            MsgBox "Компонент """ & componentFullName & """ не удалось распаковать. Смотрите лог, для разбора с ошибкой.", 16, "Ошибка распаковки компонента " & componentFullName
+        End Sub
+
+        Sub unZip7zComponentUI(component)
+            Dim componentFullName : componentFullName = component.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute("id")
+
+            log "Распаковка с использованием 7-Zip компонента: " & componentFullName
+            Dim archivePath : archivePath = gFSO.BuildPath(gDownloadPath.value, componentFullName)
+            log "    Путь к архиву: " & archivePath
+            log "    Путь распаковки: " & gInstallPath.value
+
+            If Not fileExists(gFSO.BuildPath(gInstallPath.value, "\bin\7-Zip\7z.exe")) Then
+                MsgBox "Для распаковки 7z архивов необходимо сначала установить компонент CerediraArchiver.", 16, "Ошибка распаковки компонента " & componentFullName
+                Exit Sub
+            End If
+
+            If fileExistsUI(archivePath) Then
+                If Right(archivePath, 3) = ".7z" Then
+                    If folderExistsUI(gInstallPath.value) Then
+                        If unZip7z(archivePath, gInstallPath.value) Then
+                            checkComponentsUI
+                            Exit Sub
+                        End If
+                    End If
+                End If
+            End If
+
+            MsgBox "Компонент """ & componentFullName & """ не удалось распаковать. Смотрите лог, для разбора с ошибкой.", 16, "Ошибка распаковки компонента"
+        End Sub
+
+        Sub toggleSettings()
+            Dim settings : Set settings = document.getElementById("settings")
+
+            If settings.style.display="none" Then
+                settings.style.display="table"
+            Else
+                settings.style.display="none"
+            End If
+        End Sub
+
+        Sub addContextMenuComponentUI(component)
+            Dim componentFullName : componentFullName = component.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute("id")
+            Dim componentName : componentName = Split(componentFullName, "-")(0)
+            Dim scriptPath : scriptPath = gFSO.BuildPath(gInstallPath.value, "\etc\install\" & componentName & "\CreateContextMenu.bat")
+
+            If fileExists(scriptPath) Then
+                gShell.Run scriptPath, 1, True
+                checkComponentsUI
+                Exit Sub
+            End If
+
+            MsgBox "Компонент """ & componentName & """ не удалось добавить в контекстное меню. Смотрите лог, для разбора с ошибкой.", 16, "Ошибка добавления в контекстное меню"
+        End Sub
+
+        Sub deleteContextMenuComponentUI(component)
+            Dim componentFullName : componentFullName = component.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute("id")
+            Dim componentName : componentName = Split(componentFullName, "-")(0)
+            Dim scriptPath : scriptPath = gFSO.BuildPath(gInstallPath.value, "\etc\install\" & componentName & "\DeleteContextMenu.bat")
+
+            If fileExists(scriptPath) Then
+                gShell.Run scriptPath, 1, True
+                checkComponentsUI
+                Exit Sub
+            End If
+
+            MsgBox "Компонент """ & componentName & """ не удалось удалить из контекстного меню. Смотрите лог, для разбора с ошибкой.", 16, "Ошибка удаления из контекстного меню"
+        End Sub
+    </script>
+    <style>
+        table.main {
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        table.main td {
+            width: 100%;
+        }
+
+        table.main td.center {
+            text-align: center;
+        }
+
+        table.main td input {
+            width: 100%;
+        }
+
+        table.main td textarea {
+            width: 100%;
+        }
+
+        table.components {
+            width: 100%;
+            word-wrap:break-word;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        table.components thead td {
+            border: 1px solid black;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        table.components tbody td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+        table.install {
+            word-wrap:break-word;
+            border: 0px solid black;
+            border-collapse: collapse;
+        }
+
+        table.install tr td {
+            border: 0px solid black;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        table.install input {
+            padding: 1px 1px 1px 1px;
+            margin: 1px 5px 1px 1px;
+            display: inline-block;
+            float: left;
+        }
+    </style>
+    <title>CerediraAutomationToolbox</title>
+</head>
+<body>
+    <table class="main">
+        <tr>
+            <td colspan="16"></td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <h1 align="center">CerediraAutomation 1.0</h1>
+            </td>
+            <td colspan="2" class="center">
+                <a href="#" onclick="toggleSettings()">Настройки</a>
+            </td>
+            <td colspan="2" class="center">
+                О программе
+            </td>
+        </tr>
+    </table>
+    <table class="main settings" id="settings" style="display: none;">
+        <tr>
+            <td colspan="16"></td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <label>Адрес загрузки CerediraFHS:</label>
+            </td>
+            <td colspan="9">
+                <input type="text" name="downloadURL2" value="https://github.com/Ceredira/CerediraFHS/releases/download/1.0.0" title="Адрес загрузки CerediraFHS">
+            </td>
+            <td colspan="3">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <label>Адрес загрузки CerediraAutomation:</label>
+            </td>
+            <td colspan="9">
+                <input type="text" name="downloadURL" value="https://github.com/Ceredira/CerediraAutomation/releases/download/1.0.0">
+            </td>
+            <td colspan="3">
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="4">
+                <label>Каталог скачивания компонентов:</label>
+            </td>
+            <td colspan="9">
+                <input type="text" name="downloadPath">
+            </td>
+            <td colspan="3">
+                <input type="button" value="Выбрать..." onclick="SelectDownloadFolderClick()">
+            </td>
+        </tr>
+    </table>
+
+    <table class="main">
+        <tr>
+            <td colspan="16"></td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <label>Каталог установки:</label>
+            </td>
+            <td colspan="9">
+                <input type="text" name="installPath">
+            </td>
+            <td colspan="3">
+                <input type="button" value="Выбрать..." onclick="SelectInstallFolderClick()">
+            </td>
+        </tr>
+    </table>
+
+    <table class="main" id="settings">
+        <tr>
+            <td colspan="16">
+                <h2 align="center">Управление компонентами</h2>
+            </td>
+        </tr>
+    </table>
+
+    <table class="components">
+        <thead>
+            <tr>
+                <td colspan="2">Название компонента</td>
+                <td colspan="1">Размер</td>
+                <td colspan="2">Инструменты</td>
+                <td colspan="6">Описание</td>
+                <td colspan="5">Действия</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr name="componentRow" id="CerediraFHS-1.0.0.zip">
+                <td colspan="2">
+                    <a href="#" onclick="openURL('https://github.com/Ceredira/CerediraFHS')"><b>CerediraFHS</b></a>
+                </td>
+                <td colspan="1">78.4&nbsp;KB</td>
+                <td colspan="2">Структура каталогов</td>
+                <td colspan="6">CerediraFHS - это стандарт структуры хранения каталогов и файлов внутри каталога операционной системы (ОС) Windows</td>
+                <td colspan="5">
+                    <table class="install">
+                        <tr>
+                            <td>
+                                <input type="button" name="download" class="download" value="Скачать" onclick="downloadComponent2UI(Me)">
+                                <input type="button" name="unzip" class="unzip" value="Распаковать" onclick="UnZipComponentUI(Me)">
+                                <input type="button" name="addContextMenu" class="addContextMenu" value="Добавить в КМ" title="Добавить в контекстное меню" onclick="addContextMenuComponentUI(Me)">
+                                <input type="button" name="deleteContextMenu" class="deleteContextMenu" value="Удалить из КМ" title="Удалить из контекстного меню" onclick="deleteContextMenuComponentUI(Me)">
+                                <input type="button" name="delete" class="delete" value="Удалить" onclick="deleteComponentUI(Me)">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td name="downloadCheck"></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="componentRow" id="CerediraArchiver-1.0.0.zip">
+                <td colspan="2">
+                    <a href="#" onclick="openURL('https://github.com/Ceredira/CerediraAutomation/tree/master/CerediraArchiver')"><b>CerediraArchiver</b></a>
+                </td>
+                <td colspan="1">2.42&nbsp;MB</td>
+                <td colspan="2">
+                    <a href="#" onclick="openURL('https://www.7-zip.org/')">7-Zip</a>
+                </td>
+                <td colspan="6">Компонент с архиватором, для возможности распаковки других архивов</td>
+                <td colspan="5">
+                    <table class="install">
+                        <tr>
+                            <td>
+                                <input type="button" name="download" class="download" value="Скачать" onclick="downloadComponentUI(Me)">
+                                <input type="button" name="unzip" class="unzip" value="Распаковать" onclick="UnZipComponentUI(Me)">
+                                <input type="button" name="addContextMenu" class="addContextMenu" value="Добавить в КМ" title="Добавить в контекстное меню" onclick="addContextMenuComponentUI(Me)">
+                                <input type="button" name="deleteContextMenu" class="deleteContextMenu" value="Удалить из КМ" title="Удалить из контекстного меню" onclick="deleteContextMenuComponentUI(Me)">
+                                <input type="button" name="delete" class="delete" value="Удалить" onclick="deleteComponentUI(Me)">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td name="downloadCheck"></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="componentRow" id="CerediraAdministration-1.0.0.7z">
+                <td colspan="2">
+                    <a href="#" onclick="openURL('https://github.com/Ceredira/CerediraAutomation/tree/master/CerediraAdministration')"><b>CerediraAdministration</b></a>
+                </td>
+                <td colspan="1">9.49&nbsp;MB</td>
+                <td colspan="2">
+                    <a href="#" onclick="openURL('http://www.ldapadmin.org/')">LdapAdmin</a>
+                    <br>
+                    <a href="#" onclick="openURL('http://multicommander.com/')">MultiCommander</a>
+                    <br>
+                    <a href="#" onclick="openURL('https://nssm.cc/')">Nssm</a>
+                    <br>
+                    <a href="#" onclick="openURL('https://learn.microsoft.com/en-us/sysinternals/downloads/pstools')">PsTools</a>
+                    <br>
+                    <a href="#" onclick="openURL('http://www.steffengerlach.de/freeware/')">Scanner</a>
+                </td>
+                <td colspan="6">Инструменты для администрирования ОС Windows</td>
+                <td colspan="5">
+                    <table class="install">
+                        <tr>
+                            <td>
+                                <input type="button" name="download" class="download" value="Скачать" onclick="downloadComponentUI(Me)">
+                                <input type="button" name="unzip" class="unzip" value="Распаковать" onclick="unZip7zComponentUI(Me)">
+                                <input type="button" name="addContextMenu" class="addContextMenu" value="Добавить в КМ" title="Добавить в контекстное меню" onclick="addContextMenuComponentUI(Me)">
+                                <input type="button" name="deleteContextMenu" class="deleteContextMenu" value="Удалить из КМ" title="Удалить из контекстного меню" onclick="deleteContextMenuComponentUI(Me)">
+                                <input type="button" name="delete" class="delete" value="Удалить" onclick="deleteComponentUI(Me)">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td name="downloadCheck"></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="componentrow" id="CerediraEditors-1.0.0.7z">
+                <td colspan="2">
+                    <a href="#" onclick="openURL('https://github.com/Ceredira/CerediraAutomation/tree/master/CerediraEditors')"><b>CerediraEditors</b></a>
+                </td>
+                <td colspan="1">27.6&nbsp;MB</td>
+                <td colspan="2">
+                    <a href="#" onclick="openURL('https://notepad-plus-plus.org/')">Notepad++</a>
+                    <br>
+                    <a href="#" onclick="openURL('https://www.sublimetext.com/')">SublimeText4</a>
+                    <br>
+                    <a href="#" onclick="openURL('https://winmerge.org/')">WinMerge</a>
+                </td>
+                <td colspan="6">Инструменты для работы с текстовыми файлами</td>
+                <td colspan="5">
+                    <table class="install">
+                        <tr>
+                            <td>
+                                <input type="button" name="download" class="download" value="Скачать" onclick="downloadComponentUI(Me)">
+                                <input type="button" name="unzip" class="unzip" value="Распаковать" onclick="unZip7zComponentUI(Me)">
+                                <input type="button" name="addContextMenu" class="addContextMenu" value="Добавить в КМ" title="Добавить в контекстное меню" onclick="addContextMenuComponentUI(Me)">
+                                <input type="button" name="deleteContextMenu" class="deleteContextMenu" value="Удалить из КМ" title="Удалить из контекстного меню" onclick="deleteContextMenuComponentUI(Me)">
+                                <input type="button" name="delete" class="delete" value="Удалить" onclick="deleteComponentUI(Me)">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td name="downloadCheck"></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="componentRow" id="CerediraJavaAutomation-1.0.0.7z">
+                <td colspan="2">
+                    <a href="#" onclick="openURL('https://github.com/Ceredira/CerediraAutomation/tree/master/CerediraJavaAutomation')"><b>CerediraJavaAutomation</b></a>
+                </td>
+                <td colspan="1">*&nbsp;MB</td>
+                <td colspan="2">
+                    <a href="#" onclick="openURL('https://www.jetbrains.com/ru-ru/idea/')">IntelliJ IDEA CE</a>
+                </td>
+                <td colspan="6">
+                    Среда разработки для автоматизации на Java<br>
+                    <b>Зависимости: CerediraJDK17, CerediraVersionControlGit (опционально)</b>
+                </td>
+                <td colspan="5">
+                    <table class="install">
+                        <tr>
+                            <td>
+                                <input type="button" name="download" class="download" value="Скачать" onclick="downloadComponentUI(Me)">
+                                <input type="button" name="unzip" class="unzip" value="Распаковать" onclick="unZip7zComponentUI(Me)">
+                                <input type="button" name="addContextMenu" class="addContextMenu" value="Добавить в КМ" title="Добавить в контекстное меню" onclick="addContextMenuComponentUI(Me)">
+                                <input type="button" name="deleteContextMenu" class="deleteContextMenu" value="Удалить из КМ" title="Удалить из контекстного меню" onclick="deleteContextMenuComponentUI(Me)">
+                                <input type="button" name="delete" class="delete" value="Удалить" onclick="deleteComponentUI(Me)">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td name="downloadCheck"></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="componentRow" id="CerediraJDK17-1.0.0.7z">
+                <td colspan="2">
+                    <a href="#" onclick="openURL('https://github.com/Ceredira/CerediraAutomation/tree/master/CerediraJDK17')"><b>CerediraJDK17</b></a>
+                </td>
+                <td colspan="1">*&nbsp;MB</td>
+                <td colspan="2">
+                    <a href="#" onclick="openURL('https://maven.apache.org/')">Apache Maven 3</a>
+                    <br>
+                    <a href="#" onclick="openURL('https://adoptium.net/')">OpenJDK17</a>
+                </td>
+                <td colspan="6">Инструменты для запуска Java приложений</td>
+                <td colspan="5">
+                    <table class="install">
+                        <tr>
+                            <td>
+                                <input type="button" name="download" class="download" value="Скачать" onclick="downloadComponentUI(Me)">
+                                <input type="button" name="unzip" class="unzip" value="Распаковать" onclick="unZip7zComponentUI(Me)">
+                                <input type="button" name="addContextMenu" class="addContextMenu" value="Добавить в КМ" title="Добавить в контекстное меню" onclick="addContextMenuComponentUI(Me)">
+                                <input type="button" name="deleteContextMenu" class="deleteContextMenu" value="Удалить из КМ" title="Удалить из контекстного меню" onclick="deleteContextMenuComponentUI(Me)">
+                                <input type="button" name="delete" class="delete" value="Удалить" onclick="deleteComponentUI(Me)">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td name="downloadCheck"></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="componentRow" id="CerediraPythonAutomation-1.0.0.7z">
+                <td colspan="2">
+                    <a href="#" onclick="openURL('https://github.com/Ceredira/CerediraAutomation/tree/master/CerediraPythonAutomation')"><b>CerediraPythonAutomation</b></a>
+                </td>
+                <td colspan="1">*&nbsp;MB</td>
+                <td colspan="2">
+                    <a href="#" onclick="openURL('https://www.jetbrains.com/ru-ru/pycharm/')">PyCharm</a>
+                </td>
+                <td colspan="6">
+                    Среда разработки для автоматизации на Python<br>
+                    <b>Зависимости: CerediraJDK17, CerediraVersionControlGit (опционально)</b>
+                </td>
+                <td colspan="5">
+                    <table class="install">
+                        <tr>
+                            <td>
+                                <input type="button" name="download" class="download" value="Скачать" onclick="downloadComponentUI(Me)">
+                                <input type="button" name="unzip" class="unzip" value="Распаковать" onclick="unZip7zComponentUI(Me)">
+                                <input type="button" name="addContextMenu" class="addContextMenu" value="Добавить в КМ" title="Добавить в контекстное меню" onclick="addContextMenuComponentUI(Me)">
+                                <input type="button" name="deleteContextMenu" class="deleteContextMenu" value="Удалить из КМ" title="Удалить из контекстного меню" onclick="deleteContextMenuComponentUI(Me)">
+                                <input type="button" name="delete" class="delete" value="Удалить" onclick="deleteComponentUI(Me)">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td name="downloadCheck"></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="componentRow" id="CerediraRemoteAccess-1.0.0.7z">
+                <td colspan="2">
+                    <a href="#" onclick="openURL('https://github.com/Ceredira/CerediraAutomation/tree/master/CerediraRemoteAccess')"><b>CerediraRemoteAccess</b></a>
+                </td>
+                <td colspan="1">35.3&nbsp;MB</td>
+                <td colspan="2">
+                    <a href="#" onclick="openURL('https://mremoteng.org/')">mRemoteNG</a>
+                    <br>
+                    <a href="#" onclick="openURL('https://learn.microsoft.com/en-us/sysinternals/downloads/pstools')">PsTools</a>
+                    <br>
+                    <a href="#" onclick="openURL('https://www.putty.org/')">Putty</a>
+                    <br>
+                    <a href="#" onclick="openURL('https://winscp.net/eng/docs/lang:ru')">WinSCP</a>
+                </td>
+                <td colspan="6">Инструменты для подключения к удаленным серверам</td>
+                <td colspan="5">
+                    <table class="install">
+                        <tr>
+                            <td>
+                                <input type="button" name="download" class="download" value="Скачать" onclick="downloadComponentUI(Me)">
+                                <input type="button" name="unzip" class="unzip" value="Распаковать" onclick="unZip7zComponentUI(Me)">
+                                <input type="button" name="addContextMenu" class="addContextMenu" value="Добавить в КМ" title="Добавить в контекстное меню" onclick="addContextMenuComponentUI(Me)">
+                                <input type="button" name="deleteContextMenu" class="deleteContextMenu" value="Удалить из КМ" title="Удалить из контекстного меню" onclick="deleteContextMenuComponentUI(Me)">
+                                <input type="button" name="delete" class="delete" value="Удалить" onclick="deleteComponentUI(Me)">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td name="downloadCheck"></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="componentRow" id="CerediraTools-1.0.0.7z">
+                <td colspan="2">
+                    <a href="#" onclick="openURL('https://github.com/Ceredira/CerediraAutomation/tree/master/CerediraTools')"><b>CerediraTools</b></a>
+                </td>
+                <td colspan="1">4.16&nbsp;MB</td>
+                <td colspan="2">
+                    <a href="#" onclick="openURL('https://www.voidtools.com/ru-ru/')">Everything</a>
+                    <br>
+                    <a href="#" onclick="openURL('http://findandreplace.io/')">FindAndReplace</a>
+                    <br>
+                    <a href="#" onclick="openURL('https://keepass.info/')">KeePass</a>
+                </td>
+                <td colspan="6">Дополнительные инструменты, для быстрого поиска в ОС, замены в файлах и хранения паролей</td>
+                <td colspan="5">
+                    <table class="install">
+                        <tr>
+                            <td>
+                                <input type="button" name="download" class="download" value="Скачать" onclick="downloadComponentUI(Me)">
+                                <input type="button" name="unzip" class="unzip" value="Распаковать" onclick="unZip7zComponentUI(Me)">
+                                <input type="button" name="addContextMenu" class="addContextMenu" value="Добавить в КМ" title="Добавить в контекстное меню" onclick="addContextMenuComponentUI(Me)">
+                                <input type="button" name="deleteContextMenu" class="deleteContextMenu" value="Удалить из КМ" title="Удалить из контекстного меню" onclick="deleteContextMenuComponentUI(Me)">
+                                <input type="button" name="delete" class="delete" value="Удалить" onclick="deleteComponentUI(Me)">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td name="downloadCheck"></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="componentRow" id="CerediraVersionControlGit-1.0.0.7z">
+                <td colspan="2">
+                    <a href="#" onclick="openURL('https://github.com/Ceredira/CerediraAutomation/tree/master/CerediraVersionControlGit')"><b>CerediraVersionControlGit</b></a>
+                </td>
+                <td colspan="1">51.4&nbsp;MB</td>
+                <td colspan="2">
+                    <a href="#" onclick="openURL('https://git-scm.com/')">Git</a>
+                    <br>
+                    <a href="#" onclick="openURL('https://www.sublimemerge.com/')">SublimeMerge</a>
+                </td>
+                <td colspan="6">Инструменты для проектов с контролем версий</td>
+                <td colspan="5">
+                    <table class="install">
+                        <tr>
+                            <td>
+                                <input type="button" name="download" class="download" value="Скачать" onclick="downloadComponentUI(Me)">
+                                <input type="button" name="unzip" class="unzip" value="Распаковать" onclick="unZip7zComponentUI(Me)">
+                                <input type="button" name="addContextMenu" class="addContextMenu" value="Добавить в КМ" title="Добавить в контекстное меню" onclick="addContextMenuComponentUI(Me)">
+                                <input type="button" name="deleteContextMenu" class="deleteContextMenu" value="Удалить из КМ" title="Удалить из контекстного меню" onclick="deleteContextMenuComponentUI(Me)">
+                                <input type="button" name="delete" class="delete" value="Удалить" onclick="deleteComponentUI(Me)">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td name="downloadCheck"></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <br>
+
+    <table class="main">
+        <tr>
+            <td colspan="16">
+                <h3 align="center">Лог работы системы установки</h3>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="16">
+                <textarea rows="10" id="consoleLog"></textarea>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

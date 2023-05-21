@@ -4,6 +4,7 @@
 
 # Не игнорировать следующие файлы из корня
 !/.gitignore
+!/CerediraAutomation-1.0.hta
 !/LICENSE
 !/README.md
 
