@@ -34,7 +34,7 @@ reg add "%root%" /v Icon /t REG_SZ /d "%SystemRoot%\SystemResources\imageres.dll
 
 
 
-call :CreateApp "%root%" "Notepad++" "Notepad++" "%ceredira_path%\OpenJDK17.bat" "%ComSpec%"
+call :CreateApp "%root%" "OpenJDK17" "OpenJDK17" "%ceredira_path%\OpenJDK17.bat" "%ComSpec%"
 
 pause
 
