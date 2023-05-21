@@ -1,0 +1,5 @@
+<application>
+  <component name="Git.Application.Settings">
+    <option name="myPathToGit" value="C:\Ceredira2\CerediraAutomation\bin\Git\bin\git.exe" />
+  </component>
+</application>
