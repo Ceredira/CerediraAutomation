@@ -43,6 +43,10 @@
 /CerediraAdministration/etc/install/CerediraAdministration/*
 !/CerediraAdministration/etc/install/CerediraAdministration/CreateContextMenu.bat
 !/CerediraAdministration/etc/install/CerediraAdministration/DeleteContextMenu.bat
+!/CerediraAdministration/etc/install/CerediraAdministration/DeleteComponent.bat
+!/CerediraAdministration/etc/install/CerediraAdministration/version
+/CerediraAdministration/etc/install/CerediraAdministration/version/*
+!/CerediraAdministration/etc/install/CerediraAdministration/version/1.0
 
 !/CerediraAdministration/man
 /CerediraAdministration/man/*
@@ -70,6 +74,10 @@
 /CerediraAutomation/etc/install/CerediraAutomation/*
 !/CerediraAutomation/etc/install/CerediraAutomation/CreateContextMenu.bat
 !/CerediraAutomation/etc/install/CerediraAutomation/DeleteContextMenu.bat
+!/CerediraAutomation/etc/install/CerediraAutomation/DeleteComponent.bat
+!/CerediraAutomation/etc/install/CerediraAutomation/version
+/CerediraAutomation/etc/install/CerediraAutomation/version/*
+!/CerediraAutomation/etc/install/CerediraAutomation/version/1.0
 
 !/CerediraAutomation/man
 /CerediraAutomation/man/*
@@ -105,6 +113,10 @@
 /CerediraEditors/etc/install/CerediraEditors/*
 !/CerediraEditors/etc/install/CerediraEditors/CreateContextMenu.bat
 !/CerediraEditors/etc/install/CerediraEditors/DeleteContextMenu.bat
+!/CerediraEditors/etc/install/CerediraEditors/DeleteComponent.bat
+!/CerediraEditors/etc/install/CerediraEditors/version
+/CerediraEditors/etc/install/CerediraEditors/version/*
+!/CerediraEditors/etc/install/CerediraEditors/version/1.0
 
 !/CerediraEditors/man
 /CerediraEditors/man/*
@@ -134,6 +146,10 @@
 /CerediraJDK17/etc/install/CerediraJDK17/*
 !/CerediraJDK17/etc/install/CerediraJDK17/CreateContextMenu.bat
 !/CerediraJDK17/etc/install/CerediraJDK17/DeleteContextMenu.bat
+!/CerediraJDK17/etc/install/CerediraJDK17/DeleteComponent.bat
+!/CerediraJDK17/etc/install/CerediraJDK17/version
+/CerediraJDK17/etc/install/CerediraJDK17/version/*
+!/CerediraJDK17/etc/install/CerediraJDK17/version/1.0
 
 !/CerediraJDK17/man
 /CerediraJDK17/man/*
@@ -173,6 +189,10 @@
 /CerediraRemoteAccess/etc/install/CerediraRemoteAccess/*
 !/CerediraRemoteAccess/etc/install/CerediraRemoteAccess/CreateContextMenu.bat
 !/CerediraRemoteAccess/etc/install/CerediraRemoteAccess/DeleteContextMenu.bat
+!/CerediraRemoteAccess/etc/install/CerediraRemoteAccess/DeleteComponent.bat
+!/CerediraRemoteAccess/etc/install/CerediraRemoteAccess/version
+/CerediraRemoteAccess/etc/install/CerediraRemoteAccess/version/*
+!/CerediraRemoteAccess/etc/install/CerediraRemoteAccess/version/1.0
 
 !/CerediraRemoteAccess/man
 /CerediraRemoteAccess/man/*
@@ -208,6 +228,10 @@
 /CerediraTools/etc/install/CerediraTools/*
 !/CerediraTools/etc/install/CerediraTools/CreateContextMenu.bat
 !/CerediraTools/etc/install/CerediraTools/DeleteContextMenu.bat
+!/CerediraTools/etc/install/CerediraTools/DeleteComponent.bat
+!/CerediraTools/etc/install/CerediraTools/version
+/CerediraTools/etc/install/CerediraTools/version/*
+!/CerediraTools/etc/install/CerediraTools/version/1.0
 
 !/CerediraTools/man
 /CerediraTools/man/*
@@ -240,6 +264,10 @@
 /CerediraVersionControlGit/etc/install/CerediraVersionControlGit/*
 !/CerediraVersionControlGit/etc/install/CerediraVersionControlGit/CreateContextMenu.bat
 !/CerediraVersionControlGit/etc/install/CerediraVersionControlGit/DeleteContextMenu.bat
+!/CerediraVersionControlGit/etc/install/CerediraVersionControlGit/DeleteComponent.bat
+!/CerediraVersionControlGit/etc/install/CerediraVersionControlGit/version
+/CerediraVersionControlGit/etc/install/CerediraVersionControlGit/version/*
+!/CerediraVersionControlGit/etc/install/CerediraVersionControlGit/version/1.0
 
 !/CerediraVersionControlGit/man
 /CerediraVersionControlGit/man/*
