@@ -5,4 +5,4 @@ cd /d "%~dp0"
 title PsTools
 chcp 65001>nul
 
-cmd.exe /k cd /d "bin\PsTools"
+cmd.exe /k cd /d "%cd%\bin\PsTools"

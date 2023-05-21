@@ -2,4 +2,4 @@
 
 cd /d "%~dp0"
 
-start "" "bin\MultiCommander\MultiCommander.exe"
+start "" "%cd%\bin\MultiCommander\MultiCommander.exe"

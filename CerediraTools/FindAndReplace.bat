@@ -2,4 +2,4 @@
 
 cd /d "%~dp0"
 
-start "" "bin\FindAndReplace\fnr.exe"
+start "" "%cd%\bin\FindAndReplace\fnr.exe"

@@ -2,4 +2,4 @@
 
 cd /d "%~dp0"
 
-start "" "bin\Scanner\Scanner.exe"
+start "" "%cd%\bin\Scanner\Scanner.exe"

@@ -2,4 +2,4 @@
 
 cd /d "%~dp0"
 
-start "" "bin\Notepad++\notepad++.exe"
+start "" "%cd%\bin\Notepad++\notepad++.exe"

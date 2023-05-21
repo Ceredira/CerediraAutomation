@@ -2,4 +2,4 @@
 
 cd /d "%~dp0"
 
-start "" "bin\KeePass\KeePass.exe"
+start "" "%cd%\bin\KeePass\KeePass.exe"

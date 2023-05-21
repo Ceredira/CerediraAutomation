@@ -2,4 +2,4 @@
 
 cd /d "%~dp0"
 
-start "" "bin\WinSCP\WinSCP.exe"
+start "" "%cd%\bin\WinSCP\WinSCP.exe"

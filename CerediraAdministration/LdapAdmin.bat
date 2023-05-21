@@ -2,4 +2,4 @@
 
 cd /d "%~dp0"
 
-start "" "bin\LdapAdmin\LdapAdmin.exe"
+start "" "%cd%\bin\LdapAdmin\LdapAdmin.exe"

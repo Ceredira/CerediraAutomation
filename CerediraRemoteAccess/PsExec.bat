@@ -5,4 +5,4 @@ cd /d "%~dp0"
 title PsExec
 chcp 65001>nul
 
-cmd.exe /k cd /d "bin\PsExec"
+cmd.exe /k cd /d "%cd%\bin\PsExec"

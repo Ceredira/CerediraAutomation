@@ -2,4 +2,4 @@
 
 cd /d "%~dp0"
 
-start "" "bin\Nssm\nssm.exe" install
+start "" "%cd%\bin\Nssm\nssm.exe" install

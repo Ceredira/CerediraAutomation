@@ -2,4 +2,4 @@
 
 cd /d "%~dp0"
 
-start "" "bin\WinMerge\WinMergeU.exe"
+start "" "%cd%\bin\WinMerge\WinMergeU.exe"

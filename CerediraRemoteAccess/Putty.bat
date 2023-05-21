@@ -2,4 +2,4 @@
 
 cd /d "%~dp0"
 
-start "" "bin\Putty\PUTTY.EXE"
+start "" "%cd%\bin\Putty\PUTTY.EXE"
