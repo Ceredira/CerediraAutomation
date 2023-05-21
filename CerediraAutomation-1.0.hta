@@ -150,11 +150,15 @@
                         downloadCheck.innerHTML = downloadCheck.innerHTML & ", распакован"
                     End If
                     getChildByName(component.parentElement, "addContextMenu").style.display = "table"
-                    ' getChildByName(component.parentElement, "deleteContextMenu").style.display = "table"
+                    If parent.getAttribute("id") = "CerediraJavaAutomation-1.0.0.7z" Then
+                        getChildByName(component.parentElement, "install").style.display = "table"
+                    End If
                     getChildByName(component.parentElement, "delete").style.display = "table"
                 Else
                     getChildByName(component.parentElement, "addContextMenu").style.display = "none"
-                    ' getChildByName(component.parentElement, "deleteContextMenu").style.display = "none"
+                    If parent.getAttribute("id") = "CerediraJavaAutomation-1.0.0.7z" Then
+                        getChildByName(component.parentElement, "install").style.display = "none"
+                    End If
                     getChildByName(component.parentElement, "delete").style.display = "none"
                 End If
 
@@ -272,6 +276,15 @@
             On Error Goto 0
         End Sub
 
+        Sub DownloadPS(URL, Save2File)
+            gShell.run "powershell.exe -command ""Import-Module BitsTransfer; Start-BitsTransfer -Source """ & URL & """ -Destination """ & Save2File & """", 1, True
+
+            If Err.number <> 0 then
+                log "    ОШИБКА: " & Err.number & ": " & Err.description
+                Err.clear
+            End If
+        End Sub
+
         Sub downloadComponentUI( component )
             Dim componentFullName : componentFullName = component.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute("id")
             log "Скачивание компонента: " & componentFullName
@@ -281,7 +294,7 @@
             If checkNotEmptyUI(gDownloadPath.value, "Каталог скачивания компонентов") Then
                 If checkNotEmptyUI(gDownloadURL.value, "Адрес загрузки CerediraAutomation") Then
                     If folderExistsUI(gDownloadPath.value) Then
-                        Download gDownloadURL.value & "/" & componentFullName, gFSO.BuildPath(gDownloadPath.value, componentFullName)
+                        DownloadPS gDownloadURL.value & "/" & componentFullName, gFSO.BuildPath(gDownloadPath.value, componentFullName)
                         checkComponentsUI
                         Exit Sub
                     End If
@@ -296,11 +309,11 @@
             log "Скачивание компонента: " & componentFullName
             log "    Путь к компоненту: " & gDownloadURL2.value & "/" & componentFullName
             log "    Каталог скачивания: " & gDownloadPath.value
-            
+
             If checkNotEmptyUI(gDownloadPath.value, "Каталог скачивания компонентов") Then
                 If checkNotEmptyUI(gDownloadURL2.value, "Адрес загрузки CerediraFHS") Then
                     If folderExistsUI(gDownloadPath.value) Then
-                        Download gDownloadURL2.value & "/" & componentFullName, gFSO.BuildPath(gDownloadPath.value, componentFullName)
+                        DownloadPS gDownloadURL2.value & "/" & componentFullName, gFSO.BuildPath(gDownloadPath.value, componentFullName)
                         checkComponentsUI
                         Exit Sub
                     End If
@@ -457,6 +470,20 @@
             End If
 
             MsgBox "Компонент """ & componentName & """ не удалось удалить. Смотрите лог, для разбора с ошибкой.", 16, "Ошибка удаления компонента"
+        End Sub
+
+        Sub installComponentUI(component)
+            Dim componentFullName : componentFullName = component.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute("id")
+            Dim componentName : componentName = Split(componentFullName, "-")(0)
+            Dim scriptPath : scriptPath = gFSO.BuildPath(gInstallPath.value, "\etc\install\" & componentName & "\InstallComponent.bat")
+
+            If fileExists(scriptPath) Then
+                gShell.Run scriptPath, 1, True
+                checkComponentsUI
+                Exit Sub
+            End If
+
+            MsgBox "Компонент """ & componentName & """ не удалось установить. Смотрите лог, для разбора с ошибкой.", 16, "Ошибка установки компонента"
         End Sub
     </script>
     <style>
@@ -615,7 +642,7 @@
                 <td colspan="2">
                     <a href="#" onclick="openURL('https://github.com/Ceredira/CerediraFHS')"><b>CerediraFHS</b></a>
                 </td>
-                <td colspan="1">78.4&nbsp;KB</td>
+                <td colspan="1">89.8&nbsp;KB</td>
                 <td colspan="2">Структура каталогов</td>
                 <td colspan="6">CerediraFHS - это стандарт структуры хранения каталогов и файлов внутри каталога операционной системы (ОС) Windows</td>
                 <td colspan="5">
@@ -737,7 +764,7 @@
                 <td colspan="2">
                     <a href="#" onclick="openURL('https://github.com/Ceredira/CerediraAutomation/tree/master/CerediraJavaAutomation')"><b>CerediraJavaAutomation</b></a>
                 </td>
-                <td colspan="1">*&nbsp;MB</td>
+                <td colspan="1">303&nbsp;MB</td>
                 <td colspan="2">
                     <a href="#" onclick="openURL('https://www.jetbrains.com/ru-ru/idea/')">IntelliJ IDEA CE</a>
                 </td>
@@ -752,6 +779,7 @@
                                 <input type="button" name="download" class="download" value="Скачать" onclick="downloadComponentUI(Me)">
                                 <input type="button" name="unzip" class="unzip" value="Распаковать" onclick="unZip7zComponentUI(Me)">
                                 <input type="button" name="addContextMenu" class="addContextMenu" value="Добавить в КМ" title="Добавить в контекстное меню" onclick="addContextMenuComponentUI(Me)">
+                                <input type="button" name="install" class="install" value="Установить" title="Выполнить инициализацию для правильной работы" onclick="installComponentUI(Me)">
                                 <input type="button" name="deleteContextMenu" class="deleteContextMenu" value="Удалить из КМ" title="Удалить из контекстного меню" onclick="deleteContextMenuComponentUI(Me)">
                                 <input type="button" name="delete" class="delete" value="Удалить" onclick="deleteComponentUI(Me)">
                             </td>
@@ -768,7 +796,7 @@
                 <td colspan="2">
                     <a href="#" onclick="openURL('https://github.com/Ceredira/CerediraAutomation/tree/master/CerediraJDK17')"><b>CerediraJDK17</b></a>
                 </td>
-                <td colspan="1">*&nbsp;MB</td>
+                <td colspan="1">155&nbsp;MB</td>
                 <td colspan="2">
                     <a href="#" onclick="openURL('https://maven.apache.org/')">Apache Maven 3</a>
                     <br>
