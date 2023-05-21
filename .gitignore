@@ -403,3 +403,12 @@
 !/CerediraVersionControlGit/man/CerediraVersionControlGit
 /CerediraVersionControlGit/man/CerediraVersionControlGit/*
 !/CerediraVersionControlGit/man/CerediraVersionControlGit/README.md
+
+
+# MDData
+!/MDData
+/MDData/*
+!/MDData/images
+/MDData/images/*
+!/MDData/images/CerediraAutomationToolboxAllInstall.png
+!/MDData/images/CerediraAutomationWindowsFolderAll.png
