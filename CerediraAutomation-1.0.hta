@@ -125,6 +125,9 @@
             For Each component In components
                 Dim parent : Set parent = component.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement
                 log "    Компонент: " & parent.getAttribute("id")
+                Dim componentName : componentName = Split(parent.getAttribute("id"), "-")(0)
+                Dim componentVersion : componentVersion = Split(parent.getAttribute("id"), "-")(1)
+                componentVersion = Replace(Replace(componentVersion, ".zip", ""), ".7z", "")
 
                 Dim downloadCheck : Set downloadCheck = getChildByName(component.parentElement.parentElement.parentElement, "downloadCheck")
 
@@ -141,21 +144,26 @@
                 ' Dim unzipCheck : Set unzipCheck = getChildByName(component.parentElement.parentElement.parentElement, "unzipCheck")
 
                 Dim componentInstallPath
-                componentInstallPath = gInstallPath.value & "\etc\install\" &  Split(parent.getAttribute("id"), "-")(0)
-                If gFSO.FolderExists(componentInstallPath) Then
+                componentInstallPath = gInstallPath.value & "\etc\install\" &  componentName & "\version\" & componentVersion
+                log "    Проверка существования файла: " & componentInstallPath
+                If gFSO.FileExists(componentInstallPath) Then
                     log "        Распакован"
                     If StrComp(downloadCheck.innerHTML, "") = 0 Then
                         downloadCheck.innerHTML = "Распакован"
                     Else
                         downloadCheck.innerHTML = downloadCheck.innerHTML & ", распакован"
                     End If
-                    getChildByName(component.parentElement, "addContextMenu").style.display = "table"
+                    If parent.getAttribute("id") <> "CerediraJavaAutomationIDEAFull-1.0.0.7z" Then
+                        getChildByName(component.parentElement, "addContextMenu").style.display = "table"
+                    End If
                     If parent.getAttribute("id") = "CerediraJavaAutomation-1.0.0.7z" Then
                         getChildByName(component.parentElement, "install").style.display = "table"
                     End If
                     getChildByName(component.parentElement, "delete").style.display = "table"
                 Else
-                    getChildByName(component.parentElement, "addContextMenu").style.display = "none"
+                    If parent.getAttribute("id") <> "CerediraJavaAutomationIDEAFull-1.0.0.7z" Then
+                        getChildByName(component.parentElement, "addContextMenu").style.display = "none"
+                    End If
                     If parent.getAttribute("id") = "CerediraJavaAutomation-1.0.0.7z" Then
                         getChildByName(component.parentElement, "install").style.display = "none"
                     End If
@@ -165,7 +173,7 @@
 
                 On Error Resume Next
 
-                gShell.RegRead("HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\Background\shell\" & gFSO.GetFolder(gInstallPath.value).Name & "_" & Split(parent.getAttribute("id"), "-")(0) & "\MUIVerb")
+                gShell.RegRead("HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\Background\shell\" & gFSO.GetFolder(gInstallPath.value).Name & "_" & componentName & "\MUIVerb")
                 If Err.Number = 0 Then
                     log "        Добавлен в контекстное меню"
                     If StrComp(downloadCheck.innerHTML, "") = 0 Then
@@ -213,6 +221,7 @@
             If path <> "1" Then
                 gDownloadPath.value = path
                 log "    Выбран каталог: " & gDownloadPath.value
+                checkComponentsUI
             Else
                 log "    Каталог не выбран, остался прежний"
             End If
@@ -225,6 +234,7 @@
             If path <> "1" Then
                 gInstallPath.value = path
                 log "    Выбран каталог: " & gInstallPath.value
+                checkComponentsUI
             Else
                 log "    Каталог не выбран, остался прежний"
             End If
@@ -435,7 +445,7 @@
             Dim componentName : componentName = Split(componentFullName, "-")(0)
             Dim scriptPath : scriptPath = gFSO.BuildPath(gInstallPath.value, "\etc\install\" & componentName & "\CreateContextMenu.bat")
 
-            If fileExists(scriptPath) Then
+            If fileExistsUI(scriptPath) Then
                 gShell.Run scriptPath, 1, True
                 checkComponentsUI
                 Exit Sub
@@ -449,7 +459,7 @@
             Dim componentName : componentName = Split(componentFullName, "-")(0)
             Dim scriptPath : scriptPath = gFSO.BuildPath(gInstallPath.value, "\etc\install\" & componentName & "\DeleteContextMenu.bat")
 
-            If fileExists(scriptPath) Then
+            If fileExistsUI(scriptPath) Then
                 gShell.Run scriptPath, 1, True
                 checkComponentsUI
                 Exit Sub
@@ -459,11 +469,13 @@
         End Sub
 
         Sub deleteComponentUI(component)
+            deleteContextMenuComponentUI
+
             Dim componentFullName : componentFullName = component.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute("id")
             Dim componentName : componentName = Split(componentFullName, "-")(0)
             Dim scriptPath : scriptPath = gFSO.BuildPath(gInstallPath.value, "\etc\install\" & componentName & "\DeleteComponent.bat")
 
-            If fileExists(scriptPath) Then
+            If fileExistsUI(scriptPath) Then
                 gShell.Run scriptPath, 1, True
                 checkComponentsUI
                 Exit Sub
@@ -477,7 +489,7 @@
             Dim componentName : componentName = Split(componentFullName, "-")(0)
             Dim scriptPath : scriptPath = gFSO.BuildPath(gInstallPath.value, "\etc\install\" & componentName & "\InstallComponent.bat")
 
-            If fileExists(scriptPath) Then
+            If fileExistsUI(scriptPath) Then
                 gShell.Run scriptPath, 1, True
                 checkComponentsUI
                 Exit Sub
@@ -781,6 +793,34 @@
                                 <input type="button" name="addContextMenu" class="addContextMenu" value="Добавить в КМ" title="Добавить в контекстное меню" onclick="addContextMenuComponentUI(Me)">
                                 <input type="button" name="install" class="install" value="Установить" title="Выполнить инициализацию для правильной работы" onclick="installComponentUI(Me)">
                                 <input type="button" name="deleteContextMenu" class="deleteContextMenu" value="Удалить из КМ" title="Удалить из контекстного меню" onclick="deleteContextMenuComponentUI(Me)">
+                                <input type="button" name="delete" class="delete" value="Удалить" onclick="deleteComponentUI(Me)">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td name="downloadCheck"></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="componentRow" id="CerediraJavaAutomationIDEAFull-1.0.0.7z">
+                <td colspan="2">
+                    <a href="#" onclick="openURL('https://github.com/Ceredira/CerediraAutomation/tree/master/CerediraJavaAutomationIDEAFull')"><b>CerediraJavaAutomationIDEAFull</b></a>
+                </td>
+                <td colspan="1">364&nbsp;MB</td>
+                <td colspan="2">
+                </td>
+                <td colspan="6">
+                    Содержит только jbr и плагины, которые вынесли из компонента CerediraJavaAutomation для уменьшения размера.<br>
+                    <b>Зависимости: CerediraJavaAutomation</b>
+                </td>
+                <td colspan="5">
+                    <table class="install">
+                        <tr>
+                            <td>
+                                <input type="button" name="download" class="download" value="Скачать" onclick="downloadComponentUI(Me)">
+                                <input type="button" name="unzip" class="unzip" value="Распаковать" onclick="unZip7zComponentUI(Me)">
                                 <input type="button" name="delete" class="delete" value="Удалить" onclick="deleteComponentUI(Me)">
                             </td>
                             <td></td>
