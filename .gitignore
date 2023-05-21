@@ -167,9 +167,11 @@
 !/CerediraJavaAutomation/etc/install/CerediraJavaAutomation/etc/IntelliJIDEA/options/git.xml
 !/CerediraJavaAutomation/etc/install/CerediraJavaAutomation/etc/IntelliJIDEA/options/grazie_global.xml
 !/CerediraJavaAutomation/etc/install/CerediraJavaAutomation/etc/IntelliJIDEA/options/ide.general.local.xml
+!/CerediraJavaAutomation/etc/install/CerediraJavaAutomation/etc/IntelliJIDEA/options/ide.general.xml
 !/CerediraJavaAutomation/etc/install/CerediraJavaAutomation/etc/IntelliJIDEA/options/jdk.table.xml
 !/CerediraJavaAutomation/etc/install/CerediraJavaAutomation/etc/IntelliJIDEA/options/laf.xml
 !/CerediraJavaAutomation/etc/install/CerediraJavaAutomation/etc/IntelliJIDEA/options/project.default.xml
+!/CerediraJavaAutomation/etc/install/CerediraJavaAutomation/etc/IntelliJIDEA/options/recentProjects.xml
 !/CerediraJavaAutomation/etc/install/CerediraJavaAutomation/etc/IntelliJIDEA/options/settingsSync.xml
 !/CerediraJavaAutomation/etc/install/CerediraJavaAutomation/etc/IntelliJIDEA/options/shared-indexes.xml
 !/CerediraJavaAutomation/etc/install/CerediraJavaAutomation/etc/IntelliJIDEA/options/trusted-paths.xml
