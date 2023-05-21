@@ -4,6 +4,12 @@
 
 Ошибки и предложения по улучшению можно публиковать на [странице проблем](https://github.com/Ceredira/CerediraAutomation/issues).
 
+Не нужно клонировать или скачивать репозиторий - это для разработки.
+
+Для скачивания используйте [веб-инсталлятор](https://raw.githubusercontent.com/Ceredira/CerediraAutomation/master/CerediraAutomation-1.0.hta)
+(нажмите Сохранить ссылку как) или воспользуйтесь [страницей релизов](https://github.com/Ceredira/CerediraAutomation/releases)
+для ручного скачивания всех доступных компонентов.
+
 ## Описание
 
 CerediraAutomation - это набор инструментов (дистрибутив) для автоматизации тестирования с использованием Java и\или Python.
