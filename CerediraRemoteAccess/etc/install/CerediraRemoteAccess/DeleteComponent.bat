@@ -10,12 +10,12 @@ rem set ceredira_path=D:\Ceredira_*.*
 echo Корневой каталог: %ceredira_path%
 
 del "%ceredira_path%\mRemoteNG.bat" /p
-del "%ceredira_path%\PsTools.bat" /p
+del "%ceredira_path%\PsExec.bat" /p
 del "%ceredira_path%\Putty.bat" /p
 del "%ceredira_path%\WinSCP.bat" /p
 
 rmdir "%ceredira_path%\bin\mRemoteNG" /s
-rmdir "%ceredira_path%\bin\PsTools" /s
+rmdir "%ceredira_path%\bin\PsExec" /s
 rmdir "%ceredira_path%\bin\Putty" /s
 rmdir "%ceredira_path%\bin\WinSCP" /s
 

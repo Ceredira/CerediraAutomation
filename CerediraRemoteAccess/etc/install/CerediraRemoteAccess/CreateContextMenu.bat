@@ -30,7 +30,7 @@ reg add "%root%" /v Icon /t REG_SZ /d "%SystemRoot%\SystemResources\imageres.dll
 
 
 call :CreateApp "%root%" "mRemoteNG" "mRemoteNG" "%ceredira_path%\mRemoteNG.bat" "%ceredira_path%\bin\mRemoteNG\mRemoteNG.exe"
-call :CreateApp "%root%" "PsTools" "PsTools" "%ceredira_path%\PsTools.bat" "%ceredira_path%\bin\PsTools\PsExec.exe"
+call :CreateApp "%root%" "PsExec" "PsExec" "%ceredira_path%\PsExec.bat" "%ceredira_path%\bin\PsExec\PsExec.exe"
 call :CreateApp "%root%" "Putty" "Putty" "%ceredira_path%\Putty.bat" "%ceredira_path%\bin\Putty\Putty.exe"
 call :CreateApp "%root%" "WinSCP" "WinSCP" "%ceredira_path%\WinSCP.bat" "%ceredira_path%\bin\WinSCP\WinSCP.exe"
 

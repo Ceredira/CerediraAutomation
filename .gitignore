@@ -162,7 +162,7 @@
 !/CerediraRemoteAccess
 /CerediraRemoteAccess/*
 !/CerediraRemoteAccess/mRemoteNG.bat
-!/CerediraRemoteAccess/PsTools.bat
+!/CerediraRemoteAccess/PsExec.bat
 !/CerediraRemoteAccess/Putty.bat
 !/CerediraRemoteAccess/WinSCP.bat
 
@@ -171,9 +171,9 @@
 !/CerediraRemoteAccess/bin/mRemoteNG
 /CerediraRemoteAccess/bin/mRemoteNG/*
 !/CerediraRemoteAccess/bin/mRemoteNG/README.md
-!/CerediraRemoteAccess/bin/PsTools
-/CerediraRemoteAccess/bin/PsTools/*
-!/CerediraRemoteAccess/bin/PsTools/README.md
+!/CerediraRemoteAccess/bin/PsExec
+/CerediraRemoteAccess/bin/PsExec/*
+!/CerediraRemoteAccess/bin/PsExec/README.md
 !/CerediraRemoteAccess/bin/Putty
 /CerediraRemoteAccess/bin/Putty/*
 !/CerediraRemoteAccess/bin/Putty/README.md

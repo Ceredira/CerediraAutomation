@@ -1,4 +1,4 @@
-# PsTools
+# PsExec
 
 * Официальный сайт: https://learn.microsoft.com/en-us/sysinternals/downloads/pstools
 * Адрес загрузки: https://download.sysinternals.com/files/PSTools.zip
