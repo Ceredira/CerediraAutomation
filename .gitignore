@@ -55,35 +55,35 @@
 !/CerediraAdministration/man/CerediraAdministration/README.md
 
 
-# CerediraAutomation
-!/CerediraAutomation
-/CerediraAutomation/*
-!/CerediraAutomation/7z File Manager.bat
+# CerediraArchiver
+!/CerediraArchiver
+/CerediraArchiver/*
+!/CerediraArchiver/7z File Manager.bat
 
-!/CerediraAutomation/bin
-/CerediraAutomation/bin/*
-!/CerediraAutomation/bin/7-Zip
-/CerediraAutomation/bin/7-Zip/*
-!/CerediraAutomation/bin/7-Zip/README.md
+!/CerediraArchiver/bin
+/CerediraArchiver/bin/*
+!/CerediraArchiver/bin/7-Zip
+/CerediraArchiver/bin/7-Zip/*
+!/CerediraArchiver/bin/7-Zip/README.md
 
-!/CerediraAutomation/etc
-/CerediraAutomation/etc/*
-!/CerediraAutomation/etc/install
-/CerediraAutomation/etc/install/*
-!/CerediraAutomation/etc/install/CerediraAutomation
-/CerediraAutomation/etc/install/CerediraAutomation/*
-!/CerediraAutomation/etc/install/CerediraAutomation/CreateContextMenu.bat
-!/CerediraAutomation/etc/install/CerediraAutomation/DeleteContextMenu.bat
-!/CerediraAutomation/etc/install/CerediraAutomation/DeleteComponent.bat
-!/CerediraAutomation/etc/install/CerediraAutomation/version
-/CerediraAutomation/etc/install/CerediraAutomation/version/*
-!/CerediraAutomation/etc/install/CerediraAutomation/version/1.0
+!/CerediraArchiver/etc
+/CerediraArchiver/etc/*
+!/CerediraArchiver/etc/install
+/CerediraArchiver/etc/install/*
+!/CerediraArchiver/etc/install/CerediraArchiver
+/CerediraArchiver/etc/install/CerediraArchiver/*
+!/CerediraArchiver/etc/install/CerediraArchiver/CreateContextMenu.bat
+!/CerediraArchiver/etc/install/CerediraArchiver/DeleteContextMenu.bat
+!/CerediraArchiver/etc/install/CerediraArchiver/DeleteComponent.bat
+!/CerediraArchiver/etc/install/CerediraArchiver/version
+/CerediraArchiver/etc/install/CerediraArchiver/version/*
+!/CerediraArchiver/etc/install/CerediraArchiver/version/1.0
 
-!/CerediraAutomation/man
-/CerediraAutomation/man/*
-!/CerediraAutomation/man/CerediraAutomation
-/CerediraAutomation/man/CerediraAutomation/*
-!/CerediraAutomation/man/CerediraAutomation/README.md
+!/CerediraArchiver/man
+/CerediraArchiver/man/*
+!/CerediraArchiver/man/CerediraArchiver
+/CerediraArchiver/man/CerediraArchiver/*
+!/CerediraArchiver/man/CerediraArchiver/README.md
 
 
 # CerediraEditors

@@ -13,8 +13,8 @@ del "%ceredira_path%\7z File Manager.bat" /p
 
 rmdir "%ceredira_path%\bin\7-Zip" /s
 
-rmdir "%ceredira_path%\etc\install\CerediraAutomation" /s
+rmdir "%ceredira_path%\etc\install\CerediraArchiver" /s
 
-rmdir "%ceredira_path%\man\CerediraAutomation" /s
+rmdir "%ceredira_path%\man\CerediraArchiver" /s
 
 pause
