@@ -131,6 +131,8 @@
 
                 Dim downloadCheck : Set downloadCheck = getChildByName(component.parentElement.parentElement.parentElement, "downloadCheck")
 
+                downloadCheck.innerHTML = ""
+
                 Dim componentDownloadPath
                 componentDownloadPath = gFSO.BuildPath(downloadPath.value, parent.getAttribute("id"))
                 If gFSO.FileExists(componentDownloadPath) Then
@@ -301,12 +303,14 @@
             log "    Путь к компоненту: " & gDownloadURL.value & "/" & componentFullName
             log "    Каталог скачивания: " & gDownloadPath.value
 
-            If checkNotEmptyUI(gDownloadPath.value, "Каталог скачивания компонентов") Then
-                If checkNotEmptyUI(gDownloadURL.value, "Адрес загрузки CerediraAutomation") Then
-                    If folderExistsUI(gDownloadPath.value) Then
-                        DownloadPS gDownloadURL.value & "/" & componentFullName, gFSO.BuildPath(gDownloadPath.value, componentFullName)
-                        checkComponentsUI
-                        Exit Sub
+            If checkNotEmptyUI(gDownloadURL.value, "Адрес скачивания компонентов") Then
+                If checkNotEmptyUI(gDownloadPath.value, "Каталог скачивания компонентов") Then
+                    If checkNotEmptyUI(gDownloadURL.value, "Адрес загрузки CerediraAutomation") Then
+                        If folderExistsUI(gDownloadPath.value) Then
+                            DownloadPS gDownloadURL.value & "/" & componentFullName, gFSO.BuildPath(gDownloadPath.value, componentFullName)
+                            checkComponentsUI
+                            Exit Sub
+                        End If
                     End If
                 End If
             End If
@@ -320,12 +324,14 @@
             log "    Путь к компоненту: " & gDownloadURL2.value & "/" & componentFullName
             log "    Каталог скачивания: " & gDownloadPath.value
             
-            If checkNotEmptyUI(gDownloadPath.value, "Каталог скачивания компонентов") Then
-                If checkNotEmptyUI(gDownloadURL2.value, "Адрес загрузки CerediraFHS") Then
-                    If folderExistsUI(gDownloadPath.value) Then
-                        DownloadPS gDownloadURL2.value & "/" & componentFullName, gFSO.BuildPath(gDownloadPath.value, componentFullName)
-                        checkComponentsUI
-                        Exit Sub
+            If checkNotEmptyUI(gDownloadURL.value, "Адрес скачивания компонентов") Then
+                If checkNotEmptyUI(gDownloadPath.value, "Каталог скачивания компонентов") Then
+                    If checkNotEmptyUI(gDownloadURL2.value, "Адрес загрузки CerediraFHS") Then
+                        If folderExistsUI(gDownloadPath.value) Then
+                            DownloadPS gDownloadURL2.value & "/" & componentFullName, gFSO.BuildPath(gDownloadPath.value, componentFullName)
+                            checkComponentsUI
+                            Exit Sub
+                        End If
                     End If
                 End If
             End If
@@ -469,7 +475,7 @@
         End Sub
 
         Sub deleteComponentUI(component)
-            deleteContextMenuComponentUI
+            deleteContextMenuComponentUI(component)
 
             Dim componentFullName : componentFullName = component.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute("id")
             Dim componentName : componentName = Split(componentFullName, "-")(0)
