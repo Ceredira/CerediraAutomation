@@ -102,9 +102,9 @@
             Set gShell = CreateObject("WScript.Shell")
             Set gApp = CreateObject("Shell.Application")
 
-            gInstallPath.value = gFSO.BuildPath(gShell.CurrentDirectory, "CerediraAutomation")
+            gInstallPath.value = gFSO.BuildPath(gFSO.GetParentFolderName(document.location.pathname), "CerediraAutomation")
             log "Стартовый каталог установки: " & gInstallPath.value
-            gDownloadPath.value = gShell.CurrentDirectory
+            gDownloadPath.value = gFSO.GetParentFolderName(document.location.pathname)
             log "Стартовый каталог скачивания компонентов: " & downloadPath.value
 
             checkComponentsUI
@@ -309,7 +309,7 @@
             log "Скачивание компонента: " & componentFullName
             log "    Путь к компоненту: " & gDownloadURL2.value & "/" & componentFullName
             log "    Каталог скачивания: " & gDownloadPath.value
-
+            
             If checkNotEmptyUI(gDownloadPath.value, "Каталог скачивания компонентов") Then
                 If checkNotEmptyUI(gDownloadURL2.value, "Адрес загрузки CerediraFHS") Then
                     If folderExistsUI(gDownloadPath.value) Then
