@@ -444,6 +444,20 @@
 
             MsgBox "Компонент """ & componentName & """ не удалось удалить из контекстного меню. Смотрите лог, для разбора с ошибкой.", 16, "Ошибка удаления из контекстного меню"
         End Sub
+
+        Sub deleteComponentUI(component)
+            Dim componentFullName : componentFullName = component.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute("id")
+            Dim componentName : componentName = Split(componentFullName, "-")(0)
+            Dim scriptPath : scriptPath = gFSO.BuildPath(gInstallPath.value, "\etc\install\" & componentName & "\DeleteComponent.bat")
+
+            If fileExists(scriptPath) Then
+                gShell.Run scriptPath, 1, True
+                checkComponentsUI
+                Exit Sub
+            End If
+
+            MsgBox "Компонент """ & componentName & """ не удалось удалить. Смотрите лог, для разбора с ошибкой.", 16, "Ошибка удаления компонента"
+        End Sub
     </script>
     <style>
         table.main {
