@@ -9,20 +9,12 @@ for %%i in (%~dp0\..\..\..) do set ceredira_path=%%~fxi
 rem set ceredira_path=D:\Ceredira_*.*
 echo Корневой каталог: %ceredira_path%
 
-del "%ceredira_path%\OpenJDK17.bat"
-del "%ceredira_path%\etc\install\CerediraJDK17\version\1.0.0"
-del "%ceredira_path%\etc\install\CerediraJDK17\DeleteContextMenu.bat"
-rem Этот файл нельзя удалять, так как выполнение скрипта прервется
-rem Необходимо удалять отдельными командами из инсталлятора или вручную
-rem del "%ceredira_path%\etc\install\CerediraJDK17\DeleteComponent.bat"
-
 
 del "%ceredira_path%\etc\install\CerediraJavaAutomationIDEAFull\version\1.0.0"
-del "%ceredira_path%\etc\install\CerediraJavaAutomationIDEAFull\DeleteContextMenu.bat"
 rem Этот файл нельзя удалять, так как выполнение скрипта прервется
 rem Необходимо удалять отдельными командами из инсталлятора или вручную
 rem del "%ceredira_path%\etc\install\CerediraJavaAutomationIDEAFull\DeleteComponent.bat"
-del "%ceredira_path%\etc\install\CerediraJavaAutomationIDEAFull\CreateContextMenu.bat"
+del "%ceredira_path%\bin\IntelliJIDEA\README2.md"
 del "%ceredira_path%\bin\IntelliJIDEA\plugins\vcs-svn\lib\vcs-svn.jar"
 del "%ceredira_path%\bin\IntelliJIDEA\plugins\vcs-perforce\lib\vcs-perforce.jar"
 del "%ceredira_path%\bin\IntelliJIDEA\plugins\vcs-hg\lib\vcs-hg.jar"
@@ -126,7 +118,6 @@ del "%ceredira_path%\bin\IntelliJIDEA\plugins\Kotlin\kotlinc\lib\kotlin-stdlib.j
 del "%ceredira_path%\bin\IntelliJIDEA\plugins\Kotlin\kotlinc\lib\kotlin-script-runtime-sources.jar"
 del "%ceredira_path%\bin\IntelliJIDEA\plugins\Kotlin\kotlinc\lib\kotlin-script-runtime.jar"
 del "%ceredira_path%\bin\IntelliJIDEA\plugins\Kotlin\kotlinc\lib\kotlin-scripting-jvm.jar"
-del "%ceredira_path%\bin\IntelliJIDEA\plugins\Kotlin\kotlinc\lib\kotlin-scripting-js.jar"
 del "%ceredira_path%\bin\IntelliJIDEA\plugins\Kotlin\kotlinc\lib\kotlin-scripting-compiler-impl.jar"
 del "%ceredira_path%\bin\IntelliJIDEA\plugins\Kotlin\kotlinc\lib\kotlin-scripting-compiler.jar"
 del "%ceredira_path%\bin\IntelliJIDEA\plugins\Kotlin\kotlinc\lib\kotlin-scripting-common.jar"

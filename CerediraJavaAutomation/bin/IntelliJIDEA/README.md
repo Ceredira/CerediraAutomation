@@ -1,9 +1,9 @@
 # IntelliJ IDEA
 
 * Официальный сайт: https://www.jetbrains.com/ru-ru/idea
-* Адрес загрузки: https://download.jetbrains.com/idea/ideaIC-2023.1.win.zip
-* Имя дистрибутива: ideaIC-2023.1.win.zip
-* Версия: 2023.1
+* Адрес загрузки: https://download.jetbrains.com/idea/ideaIC-2023.1.4.win.zip
+* Имя дистрибутива: ideaIC-2023.1.4.win.zip
+* Версия: 2023.1.4
 
 ## Изменения
 * Каталог jbr вынесен в компонент CerediraJavaAutomationIDEAFull, так как подразумевается использовать

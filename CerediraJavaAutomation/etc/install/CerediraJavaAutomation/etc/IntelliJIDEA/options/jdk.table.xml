@@ -1,9 +1,9 @@
 <application>
   <component name="ProjectJdkTable">
     <jdk version="2">
-      <name value="17" />
+      <name value="temurin-17" />
       <type value="JavaSDK" />
-      <version value="Eclipse Temurin version 17.0.6" />
+      <version value="Eclipse Temurin version 17.0.7" />
       <homePath value="C:/Ceredira2/CerediraAutomation/bin/OpenJDK17" />
       <roots>
         <annotationsPath>
