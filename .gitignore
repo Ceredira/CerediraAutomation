@@ -4,7 +4,7 @@
 
 # Не игнорировать следующие файлы из корня
 !/.gitignore
-!/CerediraAutomation-1.0.hta
+!/CerediraAutomation-1.1.0.hta
 !/LICENSE
 !/README.md
 
@@ -47,7 +47,7 @@
 !/CerediraAdministration/etc/install/CerediraAdministration/DeleteComponent.bat
 !/CerediraAdministration/etc/install/CerediraAdministration/version
 /CerediraAdministration/etc/install/CerediraAdministration/version/*
-!/CerediraAdministration/etc/install/CerediraAdministration/version/1.0.0
+!/CerediraAdministration/etc/install/CerediraAdministration/version/1.1.0
 
 !/CerediraAdministration/man
 /CerediraAdministration/man/*
@@ -78,7 +78,7 @@
 !/CerediraArchiver/etc/install/CerediraArchiver/DeleteComponent.bat
 !/CerediraArchiver/etc/install/CerediraArchiver/version
 /CerediraArchiver/etc/install/CerediraArchiver/version/*
-!/CerediraArchiver/etc/install/CerediraArchiver/version/1.0.0
+!/CerediraArchiver/etc/install/CerediraArchiver/version/1.1.0
 
 !/CerediraArchiver/man
 /CerediraArchiver/man/*
@@ -117,7 +117,7 @@
 !/CerediraEditors/etc/install/CerediraEditors/DeleteComponent.bat
 !/CerediraEditors/etc/install/CerediraEditors/version
 /CerediraEditors/etc/install/CerediraEditors/version/*
-!/CerediraEditors/etc/install/CerediraEditors/version/1.0.0
+!/CerediraEditors/etc/install/CerediraEditors/version/1.1.0
 
 !/CerediraEditors/man
 /CerediraEditors/man/*
@@ -188,7 +188,7 @@
 
 !/CerediraJavaAutomation/etc/install/CerediraJavaAutomation/version
 /CerediraJavaAutomation/etc/install/CerediraJavaAutomation/version/*
-!/CerediraJavaAutomation/etc/install/CerediraJavaAutomation/version/1.0.0
+!/CerediraJavaAutomation/etc/install/CerediraJavaAutomation/version/1.1.0
 !/CerediraJavaAutomation/etc/IntelliJIDEA
 /CerediraJavaAutomation/etc/IntelliJIDEA/*
 !/CerediraJavaAutomation/etc/IntelliJIDEA/README.md
@@ -244,7 +244,7 @@
 !/CerediraJavaAutomationIDEAFull/etc/install/CerediraJavaAutomationIDEAFull/DeleteComponent.bat
 !/CerediraJavaAutomationIDEAFull/etc/install/CerediraJavaAutomationIDEAFull/version
 /CerediraJavaAutomationIDEAFull/etc/install/CerediraJavaAutomationIDEAFull/version/*
-!/CerediraJavaAutomationIDEAFull/etc/install/CerediraJavaAutomationIDEAFull/version/1.0.0
+!/CerediraJavaAutomationIDEAFull/etc/install/CerediraJavaAutomationIDEAFull/version/1.1.0
 
 !/CerediraJavaAutomationIDEAFull/man
 /CerediraJavaAutomationIDEAFull/man/*
@@ -278,7 +278,7 @@
 !/CerediraJDK17/etc/install/CerediraJDK17/DeleteComponent.bat
 !/CerediraJDK17/etc/install/CerediraJDK17/version
 /CerediraJDK17/etc/install/CerediraJDK17/version/*
-!/CerediraJDK17/etc/install/CerediraJDK17/version/1.0.0
+!/CerediraJDK17/etc/install/CerediraJDK17/version/1.1.0
 
 !/CerediraJDK17/man
 /CerediraJDK17/man/*
@@ -321,7 +321,7 @@
 !/CerediraRemoteAccess/etc/install/CerediraRemoteAccess/DeleteComponent.bat
 !/CerediraRemoteAccess/etc/install/CerediraRemoteAccess/version
 /CerediraRemoteAccess/etc/install/CerediraRemoteAccess/version/*
-!/CerediraRemoteAccess/etc/install/CerediraRemoteAccess/version/1.0.0
+!/CerediraRemoteAccess/etc/install/CerediraRemoteAccess/version/1.1.0
 
 !/CerediraRemoteAccess/man
 /CerediraRemoteAccess/man/*
@@ -360,7 +360,7 @@
 !/CerediraTools/etc/install/CerediraTools/DeleteComponent.bat
 !/CerediraTools/etc/install/CerediraTools/version
 /CerediraTools/etc/install/CerediraTools/version/*
-!/CerediraTools/etc/install/CerediraTools/version/1.0.0
+!/CerediraTools/etc/install/CerediraTools/version/1.1.0
 
 !/CerediraTools/man
 /CerediraTools/man/*
@@ -396,7 +396,7 @@
 !/CerediraVersionControlGit/etc/install/CerediraVersionControlGit/DeleteComponent.bat
 !/CerediraVersionControlGit/etc/install/CerediraVersionControlGit/version
 /CerediraVersionControlGit/etc/install/CerediraVersionControlGit/version/*
-!/CerediraVersionControlGit/etc/install/CerediraVersionControlGit/version/1.0.0
+!/CerediraVersionControlGit/etc/install/CerediraVersionControlGit/version/1.1.0
 
 !/CerediraVersionControlGit/man
 /CerediraVersionControlGit/man/*

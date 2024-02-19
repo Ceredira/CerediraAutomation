@@ -18,9 +18,9 @@
       <component name="MavenImportPreferences">
         <option name="generalSettings">
           <MavenGeneralSettings>
-            <option name="localRepository" value="C:\Ceredira2\CerediraAutomation\lib\.m2\repository" />
-            <option name="mavenHome" value="C:/Ceredira2/CerediraAutomation/bin/apache-maven-3" />
-            <option name="userSettingsFile" value="C:\Ceredira2\CerediraAutomation\lib\.m2\settings.xml" />
+            <option name="localRepository" value="C:\Ceredira3\lib\.m2\repository" />
+            <option name="mavenHome" value="C:/Ceredira3/bin/apache-maven-3" />
+            <option name="userSettingsFile" value="C:\Ceredira3\lib\.m2\settings.xml" />
           </MavenGeneralSettings>
         </option>
       </component>
