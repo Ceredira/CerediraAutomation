@@ -56,6 +56,38 @@
 !/CerediraAdministration/man/CerediraAdministration/README.md
 
 
+# CerediraAndroid14
+!/CerediraAndroid14
+/CerediraAndroid14/*
+!/CerediraAndroid14/AndroidEmulatorCreateAndroid14.bat
+!/CerediraAndroid14/AndroidEmulatorRunAndroid14.bat
+
+!/CerediraAndroid14/bin
+/CerediraAndroid14/bin/*
+!/CerediraAndroid14/bin/android
+/CerediraAndroid14/bin/android/*
+!/CerediraAndroid14/bin/android/README.md
+
+!/CerediraAndroid14/etc
+/CerediraAndroid14/etc/*
+!/CerediraAndroid14/etc/install
+/CerediraAndroid14/etc/install/*
+!/CerediraAndroid14/etc/install/CerediraAndroid14
+/CerediraAndroid14/etc/install/CerediraAndroid14/*
+!/CerediraAndroid14/etc/install/CerediraAndroid14/CreateContextMenu.bat
+!/CerediraAndroid14/etc/install/CerediraAndroid14/DeleteContextMenu.bat
+!/CerediraAndroid14/etc/install/CerediraAndroid14/DeleteComponent.bat
+!/CerediraAndroid14/etc/install/CerediraAndroid14/version
+/CerediraAndroid14/etc/install/CerediraAndroid14/version/*
+!/CerediraAndroid14/etc/install/CerediraAndroid14/version/1.1.0
+
+!/CerediraAndroid14/man
+/CerediraAndroid14/man/*
+!/CerediraAndroid14/man/CerediraAndroid14
+/CerediraAndroid14/man/CerediraAndroid14/*
+!/CerediraAndroid14/man/CerediraAndroid14/README.md
+
+
 # CerediraAndroidSDK
 !/CerediraAndroidSDK
 /CerediraAndroidSDK/*
@@ -68,7 +100,6 @@
 !/CerediraAndroidSDK/bin/android
 /CerediraAndroidSDK/bin/android/*
 !/CerediraAndroidSDK/bin/android/README.md
-
 
 !/CerediraAndroidSDK/etc
 /CerediraAndroidSDK/etc/*

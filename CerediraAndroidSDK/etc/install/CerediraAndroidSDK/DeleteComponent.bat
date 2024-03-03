@@ -503,9 +503,9 @@ del "%ceredira_path%\AndroidDriversHAXMInstall.bat"
 del "%ceredira_path%\AndroidDriversAEHDInstall.bat"
 
 
+rmdir "%ceredira_path%\etc\install\CerediraAndroidSDK\version"
 rem Этот каталог нельзя удалять, так как он не пустой
 rem Необходимо удалять отдельными командами из инсталлятора или вручную
-rmdir "%ceredira_path%\etc\install\CerediraAndroidSDK\version"
 rem rmdir "%ceredira_path%\etc\install\CerediraAndroidSDK"
 rem rmdir "%ceredira_path%\etc\install"
 rem rmdir "%ceredira_path%\etc"
