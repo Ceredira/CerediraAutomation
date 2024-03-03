@@ -11,6 +11,7 @@
   * sdkmanager --install "extras;google;Android_Emulator_Hypervisor_Driver" - версия 2.0.0
   * sdkmanager --install "extras;intel;Hardware_Accelerated_Execution_Manager" - версия 7.6.5
 * Установлены утилиты платформы: sdkmanager --install "platform-tools" - версия 35.0.0
+* Установлены утилиты платформы: sdkmanager --install "build-tools;35.0.0-rc1" - версия 35.0.0-rc1
 
 ## Часто используемые команды
 

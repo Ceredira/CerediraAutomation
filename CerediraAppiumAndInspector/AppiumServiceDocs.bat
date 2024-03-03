@@ -8,6 +8,7 @@ title %~n0
 
 set "NODE_HOME=%cd%\bin\NodeJS"
 set "APPIUM_HOME=%cd%\bin\appium"
+set "ANDROID_HOME=%cd%\bin\android\sdk"
 
 set "PATH=%APPIUM_HOME%\node_modules\.bin;%NODE_HOME%;%PATH%"
 
