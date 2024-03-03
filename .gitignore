@@ -56,6 +56,46 @@
 !/CerediraAdministration/man/CerediraAdministration/README.md
 
 
+# CerediraAppiumAndInspector
+!/CerediraAppiumAndInspector
+/CerediraAppiumAndInspector/*
+!/CerediraAppiumAndInspector/AppiumCmd.bat
+!/CerediraAppiumAndInspector/AppiumInspector.bat
+!/CerediraAppiumAndInspector/AppiumService_UIAutomator2.bat
+!/CerediraAppiumAndInspector/AppiumService_XCUITest.bat
+!/CerediraAppiumAndInspector/AppiumServiceDefault.bat
+!/CerediraAppiumAndInspector/AppiumServiceDocs.bat
+
+!/CerediraAppiumAndInspector/bin
+/CerediraAppiumAndInspector/bin/*
+!/CerediraAppiumAndInspector/bin/appium
+/CerediraAppiumAndInspector/bin/appium/*
+!/CerediraAppiumAndInspector/bin/appium/README.md
+!/CerediraAppiumAndInspector/bin/appium_inspector
+/CerediraAppiumAndInspector/bin/appium_inspector/*
+!/CerediraAppiumAndInspector/bin/appium_inspector/README.md
+
+
+!/CerediraAppiumAndInspector/etc
+/CerediraAppiumAndInspector/etc/*
+!/CerediraAppiumAndInspector/etc/install
+/CerediraAppiumAndInspector/etc/install/*
+!/CerediraAppiumAndInspector/etc/install/CerediraAppiumAndInspector
+/CerediraAppiumAndInspector/etc/install/CerediraAppiumAndInspector/*
+!/CerediraAppiumAndInspector/etc/install/CerediraAppiumAndInspector/CreateContextMenu.bat
+!/CerediraAppiumAndInspector/etc/install/CerediraAppiumAndInspector/DeleteContextMenu.bat
+!/CerediraAppiumAndInspector/etc/install/CerediraAppiumAndInspector/DeleteComponent.bat
+!/CerediraAppiumAndInspector/etc/install/CerediraAppiumAndInspector/version
+/CerediraAppiumAndInspector/etc/install/CerediraAppiumAndInspector/version/*
+!/CerediraAppiumAndInspector/etc/install/CerediraAppiumAndInspector/version/1.1.0
+
+!/CerediraAppiumAndInspector/man
+/CerediraAppiumAndInspector/man/*
+!/CerediraAppiumAndInspector/man/CerediraAppiumAndInspector
+/CerediraAppiumAndInspector/man/CerediraAppiumAndInspector/*
+!/CerediraAppiumAndInspector/man/CerediraAppiumAndInspector/README.md
+
+
 # CerediraArchiver
 !/CerediraArchiver
 /CerediraArchiver/*
