@@ -56,6 +56,46 @@
 !/CerediraAdministration/man/CerediraAdministration/README.md
 
 
+# CerediraAndroidSDK
+!/CerediraAndroidSDK
+/CerediraAndroidSDK/*
+!/CerediraAndroidSDK/AndroidDriversAEHDInstall.bat
+!/CerediraAndroidSDK/AndroidDriversHAXMInstall.bat
+!/CerediraAndroidSDK/AndroidSDKCmd.bat
+
+!/CerediraAndroidSDK/bin
+/CerediraAndroidSDK/bin/*
+!/CerediraAndroidSDK/bin/android
+/CerediraAndroidSDK/bin/android/*
+!/CerediraAndroidSDK/bin/android/README.md
+
+
+!/CerediraAndroidSDK/etc
+/CerediraAndroidSDK/etc/*
+!/CerediraAndroidSDK/etc/install
+/CerediraAndroidSDK/etc/install/*
+!/CerediraAndroidSDK/etc/install/CerediraAndroidSDK
+/CerediraAndroidSDK/etc/install/CerediraAndroidSDK/*
+!/CerediraAndroidSDK/etc/install/CerediraAndroidSDK/CreateContextMenu.bat
+!/CerediraAndroidSDK/etc/install/CerediraAndroidSDK/DeleteContextMenu.bat
+!/CerediraAndroidSDK/etc/install/CerediraAndroidSDK/DeleteComponent.bat
+!/CerediraAndroidSDK/etc/install/CerediraAndroidSDK/version
+/CerediraAndroidSDK/etc/install/CerediraAndroidSDK/version/*
+!/CerediraAndroidSDK/etc/install/CerediraAndroidSDK/version/1.1.0
+
+!/CerediraAndroidSDK/man
+/CerediraAndroidSDK/man/*
+!/CerediraAndroidSDK/man/CerediraAndroidSDK
+/CerediraAndroidSDK/man/CerediraAndroidSDK/*
+!/CerediraAndroidSDK/man/CerediraAndroidSDK/README.md
+
+!/CerediraAndroidSDK/var
+/CerediraAndroidSDK/var/*
+!/CerediraAndroidSDK/var/android
+/CerediraAndroidSDK/var/android/*
+!/CerediraAndroidSDK/var/android/README.md
+
+
 # CerediraAppiumAndInspector
 !/CerediraAppiumAndInspector
 /CerediraAppiumAndInspector/*
@@ -74,7 +114,6 @@
 !/CerediraAppiumAndInspector/bin/appium_inspector
 /CerediraAppiumAndInspector/bin/appium_inspector/*
 !/CerediraAppiumAndInspector/bin/appium_inspector/README.md
-
 
 !/CerediraAppiumAndInspector/etc
 /CerediraAppiumAndInspector/etc/*
