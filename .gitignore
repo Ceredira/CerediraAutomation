@@ -207,8 +207,8 @@
 
 !/CerediraJavaAutomation/man
 /CerediraJavaAutomation/man/*
-!/CerediraJavaAutomation/man/CerediraJDK17
-/CerediraJavaAutomation/man/CerediraJDK17/*
+!/CerediraJavaAutomation/man/CerediraJavaAutomation
+/CerediraJavaAutomation/man/CerediraJavaAutomation/*
 !/CerediraJavaAutomation/man/CerediraJavaAutomation/README.md
 
 !/CerediraJavaAutomation/var
@@ -248,8 +248,8 @@
 
 !/CerediraJavaAutomationIDEAFull/man
 /CerediraJavaAutomationIDEAFull/man/*
-!/CerediraJavaAutomationIDEAFull/man/CerediraJDK17
-/CerediraJavaAutomationIDEAFull/man/CerediraJDK17/*
+!/CerediraJavaAutomationIDEAFull/man/CerediraJavaAutomationIDEAFull
+/CerediraJavaAutomationIDEAFull/man/CerediraJavaAutomationIDEAFull/*
 !/CerediraJavaAutomationIDEAFull/man/CerediraJavaAutomationIDEAFull/README.md
 
 
@@ -285,6 +285,37 @@
 !/CerediraJDK17/man/CerediraJDK17
 /CerediraJDK17/man/CerediraJDK17/*
 !/CerediraJDK17/man/CerediraJDK17/README.md
+
+
+# CerediraNodeJS
+!/CerediraNodeJS
+/CerediraNodeJS/*
+!/CerediraNodeJS/NodeJS.bat
+
+!/CerediraNodeJS/bin
+/CerediraNodeJS/bin/*
+!/CerediraNodeJS/bin/NodeJS
+/CerediraNodeJS/bin/NodeJS/*
+!/CerediraNodeJS/bin/NodeJS/README.md
+
+!/CerediraNodeJS/etc
+/CerediraNodeJS/etc/*
+!/CerediraNodeJS/etc/install
+/CerediraNodeJS/etc/install/*
+!/CerediraNodeJS/etc/install/CerediraNodeJS
+/CerediraNodeJS/etc/install/CerediraNodeJS/*
+!/CerediraNodeJS/etc/install/CerediraNodeJS/CreateContextMenu.bat
+!/CerediraNodeJS/etc/install/CerediraNodeJS/DeleteContextMenu.bat
+!/CerediraNodeJS/etc/install/CerediraNodeJS/DeleteComponent.bat
+!/CerediraNodeJS/etc/install/CerediraNodeJS/version
+/CerediraNodeJS/etc/install/CerediraNodeJS/version/*
+!/CerediraNodeJS/etc/install/CerediraNodeJS/version/1.1.0
+
+!/CerediraNodeJS/man
+/CerediraNodeJS/man/*
+!/CerediraNodeJS/man/CerediraNodeJS
+/CerediraNodeJS/man/CerediraNodeJS/*
+!/CerediraNodeJS/man/CerediraNodeJS/README.md
 
 
 # CerediraRemoteAccess
@@ -364,9 +395,9 @@
 
 !/CerediraTools/man
 /CerediraTools/man/*
-!/CerediraTools/man/CerediraJDK17
-/CerediraTools/man/CerediraJDK17/*
-!/CerediraTools/man/CerediraJDK17/README.md
+!/CerediraTools/man/CerediraTools
+/CerediraTools/man/CerediraTools/*
+!/CerediraTools/man/CerediraTools/README.md
 
 
 # CerediraVersionControlGit
