@@ -13,7 +13,7 @@ del "%ceredira_path%\WinSCP.bat"
 del "%ceredira_path%\Putty.bat"
 del "%ceredira_path%\PsExec.bat"
 del "%ceredira_path%\mRemoteNG.bat"
-del "%ceredira_path%\etc\install\CerediraRemoteAccess\version\1.0.0"
+del "%ceredira_path%\etc\install\CerediraRemoteAccess\version\1.1.0"
 del "%ceredira_path%\etc\install\CerediraRemoteAccess\DeleteContextMenu.bat"
 rem Этот файл нельзя удалять, так как выполнение скрипта прервется
 rem Необходимо удалять отдельными командами из инсталлятора или вручную

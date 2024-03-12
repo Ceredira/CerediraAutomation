@@ -15,7 +15,7 @@ del "%ceredira_path%\Nssm.bat"
 del "%ceredira_path%\MultiCommander.bat"
 del "%ceredira_path%\man\CerediraAdministration\README.md"
 del "%ceredira_path%\LdapAdmin.bat"
-del "%ceredira_path%\etc\install\CerediraAdministration\version\1.0.0"
+del "%ceredira_path%\etc\install\CerediraAdministration\version\1.1.0"
 del "%ceredira_path%\etc\install\CerediraAdministration\DeleteContextMenu.bat"
 rem Этот файл нельзя удалять, так как выполнение скрипта прервется
 rem Необходимо удалять отдельными командами из инсталлятора или вручную

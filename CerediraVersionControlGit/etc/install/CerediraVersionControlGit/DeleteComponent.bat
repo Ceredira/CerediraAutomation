@@ -12,7 +12,7 @@ echo Корневой каталог: %ceredira_path%
 del "%ceredira_path%\SublimeMerge.bat"
 del "%ceredira_path%\Git GUI.bat"
 del "%ceredira_path%\Git Bash.bat"
-del "%ceredira_path%\etc\install\CerediraVersionControlGit\version\1.0.0"
+del "%ceredira_path%\etc\install\CerediraVersionControlGit\version\1.1.0"
 del "%ceredira_path%\etc\install\CerediraVersionControlGit\DeleteContextMenu.bat"
 rem Этот файл нельзя удалять, так как выполнение скрипта прервется
 rem Необходимо удалять отдельными командами из инсталлятора или вручную

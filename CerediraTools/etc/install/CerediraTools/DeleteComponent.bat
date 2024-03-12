@@ -12,7 +12,7 @@ echo Корневой каталог: %ceredira_path%
 del "%ceredira_path%\KeePass.bat"
 del "%ceredira_path%\FindAndReplace.bat"
 del "%ceredira_path%\Everything.bat"
-del "%ceredira_path%\etc\install\CerediraTools\version\1.0.0"
+del "%ceredira_path%\etc\install\CerediraTools\version\1.1.0"
 del "%ceredira_path%\etc\install\CerediraTools\DeleteContextMenu.bat"
 rem Этот файл нельзя удалять, так как выполнение скрипта прервется
 rem Необходимо удалять отдельными командами из инсталлятора или вручную

@@ -9,7 +9,7 @@ for %%i in (%~dp0\..\..\..) do set ceredira_path=%%~fxi
 rem set ceredira_path=D:\Ceredira_*.*
 echo Корневой каталог: %ceredira_path%
 
-del "%ceredira_path%\etc\install\CerediraArchiver\version\1.0.0"
+del "%ceredira_path%\etc\install\CerediraArchiver\version\1.1.0"
 del "%ceredira_path%\etc\install\CerediraArchiver\DeleteContextMenu.bat"
 rem Этот файл нельзя удалять, так как выполнение скрипта прервется
 rem Необходимо удалять отдельными командами из инсталлятора или вручную

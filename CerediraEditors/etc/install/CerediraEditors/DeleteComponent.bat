@@ -12,7 +12,7 @@ echo Корневой каталог: %ceredira_path%
 del "%ceredira_path%\WinMerge.bat"
 del "%ceredira_path%\SublimeText4.bat"
 del "%ceredira_path%\Notepad++.bat"
-del "%ceredira_path%\etc\install\CerediraEditors\version\1.0.0"
+del "%ceredira_path%\etc\install\CerediraEditors\version\1.1.0"
 del "%ceredira_path%\etc\install\CerediraEditors\DeleteContextMenu.bat"
 rem Этот файл нельзя удалять, так как выполнение скрипта прервется
 rem Необходимо удалять отдельными командами из инсталлятора или вручную

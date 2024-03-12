@@ -10,7 +10,7 @@ rem set ceredira_path=D:\Ceredira_*.*
 echo Корневой каталог: %ceredira_path%
 
 del "%ceredira_path%\OpenJDK17.bat"
-del "%ceredira_path%\etc\install\CerediraJDK17\version\1.0.0"
+del "%ceredira_path%\etc\install\CerediraJDK17\version\1.1.0"
 del "%ceredira_path%\etc\install\CerediraJDK17\DeleteContextMenu.bat"
 rem Этот файл нельзя удалять, так как выполнение скрипта прервется
 rem Необходимо удалять отдельными командами из инсталлятора или вручную
