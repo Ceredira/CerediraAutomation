@@ -23,7 +23,7 @@ copy /y ".\etc\IntelliJIDEA\options\updates.xml" "%devopsat_path%\etc\IntelliJID
 copy /y ".\etc\IntelliJIDEA\options\vcs.xml" "%devopsat_path%\etc\IntelliJIDEA\options"
 
 mkdir "%devopsat_path%\var\IntelliJIDEA\grazie"
-copy /y ".\var\IntelliJIDEA\grazie\ru-6.0.jar" "%devopsat_path%\var\IntelliJIDEA\grazie"
+copy /y ".\var\IntelliJIDEA\grazie\ru-6.1.jar" "%devopsat_path%\var\IntelliJIDEA\grazie"
 
 powershell -command "(Get-Content -Raw '.\etc\IntelliJIDEA\options\git.xml').replace('C:\Ceredira2\CerediraAutomation', '%devopsat_path%') | Set-Content '%devopsat_path%\etc\IntelliJIDEA\options\git.xml'"
 
