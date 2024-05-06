@@ -6,7 +6,7 @@
 
 Не нужно клонировать или скачивать репозиторий - это для разработки.
 
-Для скачивания используйте [веб-инсталлятор](https://raw.githubusercontent.com/Ceredira/CerediraAutomation/master/CerediraAutomation-1.0.hta)
+Для скачивания используйте [веб-инсталлятор](https://github.com/Ceredira/CerediraAutomation/releases/download/1.1.0.1/CerediraAutomation-1.1.0.hta)
 (нажмите Сохранить ссылку как) или воспользуйтесь [страницей релизов](https://github.com/Ceredira/CerediraAutomation/releases)
 для ручного скачивания всех доступных компонентов.
 
